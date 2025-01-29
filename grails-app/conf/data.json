@@ -1,0 +1,45 @@
+{
+  "books": [
+    {
+      "title": "Grails 1"
+    },
+    {
+      "title": "Grails 2"
+    },
+    {
+      "title": "Grails 3"
+    },
+    {
+      "title": "GSP"
+    },
+    {
+      "title": "Codenames"
+    },
+    {
+      "title": "Sesame Street"
+    },
+    {
+      "title": "Night Agent"
+    },
+    {
+      "title": "Night Agent 2"
+    },
+    {
+      "title": "Peoples"
+    }
+  ],
+  "users": [
+    {
+      "name": "John Doe"
+    },
+    {
+      "name": "Emily Doe"
+    },
+    {
+      "name": "Peter Doe"
+    },
+    {
+      "name": "Kier Pag"
+    }
+  ]
+}
