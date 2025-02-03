@@ -26,7 +26,7 @@ class BootStrap {
 
         data.books.each { b ->
             new Book(title: b.title,
-                    user: userList.get(RandomUtils.randomize(data.users.size())),
+                    author: userList.get(RandomUtils.randomize(data.users.size())),
                     status: BookStatus.IN)
                     .save()
         }

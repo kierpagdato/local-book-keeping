@@ -17,7 +17,7 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
 
     void "Test the index action returns the correct model"() {
         given:
-        controller.userService = Mock(UserService) {
+        controller.userService = Mock(IUserDaoService) {
             1 * list(_) >> []
             1 * count() >> 0
         }
@@ -51,7 +51,7 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
 
     void "Test the save action correctly persists"() {
         given:
-        controller.userService = Mock(UserService) {
+        controller.userService = Mock(IUserDaoService) {
             1 * save(_ as User)
         }
 
@@ -72,7 +72,7 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
 
     void "Test the save action with an invalid instance"() {
         given:
-        controller.userService = Mock(UserService) {
+        controller.userService = Mock(IUserDaoService) {
             1 * save(_ as User) >> { User user ->
                 throw new ValidationException("Invalid instance", user.errors)
             }
@@ -91,7 +91,7 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
 
     void "Test the show action with a null id"() {
         given:
-        controller.userService = Mock(UserService) {
+        controller.userService = Mock(IUserDaoService) {
             1 * get(null) >> null
         }
 
@@ -104,7 +104,7 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
 
     void "Test the show action with a valid id"() {
         given:
-        controller.userService = Mock(UserService) {
+        controller.userService = Mock(IUserDaoService) {
             1 * get(2) >> new User()
         }
 
@@ -117,7 +117,7 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
 
     void "Test the edit action with a null id"() {
         given:
-        controller.userService = Mock(UserService) {
+        controller.userService = Mock(IUserDaoService) {
             1 * get(null) >> null
         }
 
@@ -130,7 +130,7 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
 
     void "Test the edit action with a valid id"() {
         given:
-        controller.userService = Mock(UserService) {
+        controller.userService = Mock(IUserDaoService) {
             1 * get(2) >> new User()
         }
 
@@ -155,7 +155,7 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
 
     void "Test the update action correctly persists"() {
         given:
-        controller.userService = Mock(UserService) {
+        controller.userService = Mock(IUserDaoService) {
             1 * save(_ as User)
         }
 
@@ -176,7 +176,7 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
 
     void "Test the update action with an invalid instance"() {
         given:
-        controller.userService = Mock(UserService) {
+        controller.userService = Mock(IUserDaoService) {
             1 * save(_ as User) >> { User user ->
                 throw new ValidationException("Invalid instance", user.errors)
             }
@@ -205,7 +205,7 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
 
     void "Test the delete action with an instance"() {
         given:
-        controller.userService = Mock(UserService) {
+        controller.userService = Mock(IUserDaoService) {
             1 * delete(2)
         }
 

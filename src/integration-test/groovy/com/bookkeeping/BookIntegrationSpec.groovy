@@ -9,7 +9,7 @@ import spock.lang.Specification
 @Rollback
 class BookIntegrationSpec extends Specification {
 
-    BookService bookService
+    IBookDaoService bookService
     SessionFactory sessionFactory
 
     private Long setupData() {

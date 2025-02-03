@@ -5,17 +5,17 @@ import static org.springframework.http.HttpStatus.*
 
 class UserController {
 
-    UserService userService
+    UserDaoService userDaoService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond userService.list(params), model:[userCount: userService.count()]
+        respond userDaoService.list(params), model:[userCount: userDaoService.count()]
     }
 
     def show(Long id) {
-        respond userService.get(id)
+        respond userDaoService.get(id)
     }
 
     def create() {
@@ -29,7 +29,7 @@ class UserController {
         }
 
         try {
-            userService.save(user)
+            userDaoService.save(user)
         } catch (ValidationException e) {
             respond user.errors, view:'create'
             return
@@ -45,7 +45,7 @@ class UserController {
     }
 
     def edit(Long id) {
-        respond userService.get(id)
+        respond userDaoService.get(id)
     }
 
     def update(User user) {
@@ -55,7 +55,7 @@ class UserController {
         }
 
         try {
-            userService.save(user)
+            userDaoService.save(user)
         } catch (ValidationException e) {
             respond user.errors, view:'edit'
             return
@@ -76,7 +76,7 @@ class UserController {
             return
         }
 
-        userService.delete(id)
+        userDaoService.delete(id)
 
         request.withFormat {
             form multipartForm {

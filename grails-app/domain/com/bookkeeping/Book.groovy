@@ -11,10 +11,15 @@ class Book {
     Date dateCreated
     Date lastUpdated
 
-    static belongsTo = [user: User]
+    static belongsTo = [author: User]
 
     static mapping = {
         status enumType: 'string'
+    }
+
+    @Override
+    String toString() {
+        title
     }
 
 }

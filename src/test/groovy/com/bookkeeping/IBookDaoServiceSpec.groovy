@@ -3,7 +3,7 @@ package com.bookkeeping
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class BookServiceSpec extends Specification implements ServiceUnitTest<BookService>{
+class IBookDaoServiceSpec extends Specification implements ServiceUnitTest<IBookDaoService>{
 
     def setup() {
     }

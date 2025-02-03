@@ -1,9 +1,9 @@
 package com.bookkeeping
 
 import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
 
-@Service(User)
-interface UserService {
+interface IUserDaoService {
 
     User get(Serializable id)
 
@@ -14,5 +14,11 @@ interface UserService {
     void delete(Serializable id)
 
     User save(User user)
+
+}
+
+@Transactional
+@Service(User)
+abstract class UserDaoService implements IUserDaoService {
 
 }

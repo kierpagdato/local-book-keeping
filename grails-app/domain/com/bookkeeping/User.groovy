@@ -7,6 +7,8 @@ class User {
     Date dateCreated
     Date lastUpdated
 
+    static hasMany = [books: Book]
+
     static constraints = {
     }
 

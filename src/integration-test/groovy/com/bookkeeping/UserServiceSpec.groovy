@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory
 @Rollback
 class UserServiceSpec extends Specification {
 
-    UserService userService
+    IUserDaoService userService
     SessionFactory sessionFactory
 
     private Long setupData() {

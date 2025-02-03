@@ -13,7 +13,7 @@ class BookControllerSpec extends Specification implements ControllerUnitTest<Boo
 
     void "Test the index action returns the correct model"() {
         given:
-        controller.bookService = Mock(BookService) {
+        controller.bookService = Mock(IBookDaoService) {
             list() >> [new Book(title: 'Sesame Street', author: 'John Doe')]
         }
 
