@@ -75,6 +75,16 @@ dependencies {
     testImplementation "org.seleniumhq.selenium:selenium-support:4.0.0"
     testRuntimeOnly "org.seleniumhq.selenium:selenium-chrome-driver:4.0.0"
     testRuntimeOnly "org.seleniumhq.selenium:selenium-firefox-driver:4.0.0"
+
+
+    implementation "com.bertramlabs.plugins:asset-pipeline-grails:4.3.0"
+
+    if (System.getProperty("os.arch") == "aarch64") {
+        assets 'com.bertramlabs.plugins:sass-dart-asset-pipeline:4.0.0'
+    } else {
+        assets 'com.bertramlabs.plugins:sass-asset-pipeline:5.0.5'
+    }
+
 }
 
 bootRun {

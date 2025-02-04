@@ -1,20 +1,29 @@
 package com.bookkeeping
 
-import com.bookkeeping.enums.BookStatus
-
 class Book {
 
     String title
+    String author
 
-    BookStatus status
+    Status status
+
+    int quantity
+
+    String description
 
     Date dateCreated
     Date lastUpdated
 
-    static belongsTo = [author: User]
-
     static mapping = {
         status enumType: 'string'
+        description type: 'text'
+    }
+
+    static constraints = {
+        title nullable: false, blank: false
+        author nullable: false, blank: false
+        status nullable: false
+        quantity min: 1
     }
 
     @Override
@@ -22,4 +31,8 @@ class Book {
         title
     }
 
+
+    enum Status {
+        Out, In
+    }
 }

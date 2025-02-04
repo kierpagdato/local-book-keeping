@@ -44,6 +44,11 @@ environments:
             endpoints:
                 enabled-by-default: false
 
+bookkeeping:
+    fields:
+        input:
+            textarea:
+                - description
 ---
 grails:
     mime:

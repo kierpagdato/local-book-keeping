@@ -1,18 +1,21 @@
 package com.bookkeeping
 
+import com.bookkeeping.dao.BookDaoService
+
 class BookController {
 
-    def bookService
+    BookDaoService bookDaoService
 
     def index() {
-        if(params.max == null)
-            params.max = 5
-
-        [list: bookService.list(params), count: bookService.count()]
+        params.max = params?.max ?: 5
+        List<Book> bookList =bookDaoService.list(params);
+        [list: bookList,
+         count: bookList.getTotalCount(),
+         fieldProperties: ['title', 'author', 'status', 'quantity', 'dateCreated', 'lastUpdated']]
     }
 
     def show(Long id) {
-        respond bookService.get(id)
+        respond bookDaoService.get(id)
     }
 
     def create() {
@@ -20,12 +23,23 @@ class BookController {
     }
 
     def save(Book book) {
-        bookService.save(book)
+
+        println "saving"
+        if(!book.validate()) {
+            render(view: 'create', model: [book: book])
+            return
+        }
+
+        book.status = Book.Status.In
+
+        bookDaoService.save(book)
+
+        println "done save"
         redirect action:"index", method:"GET"
     }
 
     def delete(Long id) {
-        bookService.delete(id)
+        bookDaoService.delete(id)
         redirect action:"index", method:"GET"
     }
 }

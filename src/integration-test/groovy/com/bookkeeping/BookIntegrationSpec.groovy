@@ -1,5 +1,6 @@
 package com.bookkeeping
 
+import com.bookkeeping.dao.IBookDaoService
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
 import org.hibernate.SessionFactory

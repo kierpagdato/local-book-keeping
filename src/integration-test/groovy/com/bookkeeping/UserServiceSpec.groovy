@@ -1,5 +1,6 @@
 package com.bookkeeping
 
+import com.bookkeeping.dao.IUserDaoService
 import grails.testing.mixin.integration.Integration
 import grails.gorm.transactions.Rollback
 import spock.lang.Specification

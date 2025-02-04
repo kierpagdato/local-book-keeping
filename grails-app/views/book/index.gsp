@@ -4,15 +4,21 @@
         <meta name="layout" content="main" />
     </head>
     <body>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><g:link class="create" action="create">Create</g:link></li>
-            </ul>
-        </div>
-        <div id="list-book" class="content scaffold-list" role="main">
-            <f:table collection="${list}"
-                properties="['title', 'author.name', 'status', 'dateCreated', 'lastUpdated']" />
-            <g:paginate controller="book" action="index" total="${count}" max="5" />
+
+        <div class="columns is-mobile is-centered">
+
+            <div class="column is-half">
+
+                <g:render template="breadcrumbs" model="[active:'list']"/>
+
+                <f:table collection="${list}"
+                    properties="${fieldProperties}" />
+
+                </br>
+
+                <p>Query result: ${count}</p>
+                <bl:paginate controller="book" action="index" total="${count}" max="5" params="${params}"/>
+            </div>
         </div>
     </body>
 </html>
