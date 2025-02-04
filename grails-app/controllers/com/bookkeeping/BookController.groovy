@@ -24,7 +24,6 @@ class BookController {
 
     def save(Book book) {
 
-        println "saving"
         if(!book.validate()) {
             render(view: 'create', model: [book: book])
             return
@@ -34,7 +33,6 @@ class BookController {
 
         bookDaoService.save(book)
 
-        println "done save"
         redirect action:"index", method:"GET"
     }
 
