@@ -20,17 +20,17 @@ class Book {
     }
 
     static constraints = {
-        title nullable: false, blank: false
-        author nullable: false, blank: false
+        title maxSize: 50, nullable: false, blank: false
+        author maxSize: 50, nullable: false, blank: false
         status nullable: false
         quantity min: 1
+        description maxSize: 1000, nullable: false, blank: false
     }
 
     @Override
     String toString() {
-        title
+        "${title} : ${author} : ${quantity} : ${description}"
     }
-
 
     enum Status {
         Out, In

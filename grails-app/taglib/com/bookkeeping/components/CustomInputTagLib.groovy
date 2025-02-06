@@ -9,10 +9,12 @@ class CustomInputTagLib {
 
     InputConfigService inputConfigService
 
-
     Closure input = { attrsMap ->
 
         def writer = out
+
+        boolean required = attrsMap["required"]?: false
+        attrsMap.remove("required")
 
         if(attrsMap.name as String in inputConfigService.textareaFields) {
 
@@ -20,15 +22,15 @@ class CustomInputTagLib {
             attrsMap.remove("value")
 
             attrsMap << [rows: "3"]
-            attrsMap << [class: "textarea" + attrsMap.class]
+            attrsMap << [class: "textarea " + attrsMap.class]
 
-            writer << "<textarea ${MapUtils.mapToHtmlAttr(attrsMap)}>${textValue?: ''}</textarea>"
+            writer << "<textarea ${MapUtils.mapToHtmlAttr(attrsMap)} ${required? 'required' : ''}>${textValue?: ''}</textarea>"
         } else {
 
             attrsMap << [type: "text"]
-            attrsMap << [class: "input" + attrsMap.class]
+            attrsMap << [class: "input " + attrsMap.class]
 
-            writer << "<input ${MapUtils.mapToHtmlAttr(attrsMap)}/>"
+            writer << "<input ${MapUtils.mapToHtmlAttr(attrsMap)} ${required? 'required' : ''}/>"
         }
 
 

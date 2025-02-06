@@ -11,6 +11,8 @@ interface IBookDaoService {
 
     Long count()
 
+    Book save(Book book)
+
     void delete(id)
 
 }
@@ -28,7 +30,4 @@ abstract class BookDaoService implements IBookDaoService {
         }
     }
 
-    Book save(book) {
-        return book.save()
-    }
 }

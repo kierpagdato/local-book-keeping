@@ -13,24 +13,31 @@
 
                 </br>
 
-        <p>Create date: ${this.book.dateCreated}</p>
-        <p>Last modified date: ${this.book.lastUpdated}</p>
-                <g:form resource="${this.book}" method="POST">
+                <div class="tags">
+                    <span class="tag is-light">
+                        <strong>Create date:</strong> ${this.book.dateCreated}
+                    </span>
+                    <span class="tag is-light">
+                        <strong>Last modified date:</strong> ${this.book.lastUpdated}
+                    </span>
+                </div>
 
-                    <div class="card">
-                      <header class="card-header">
-                        <p class="card-header-title">Book info</p>
-                      </header>
-                      <div class="card-content">
-                        <div class="content">
-                            <f:all bean="book" order="['author','title', 'status', 'quantity', 'description']"/>
-                        </div>
-                      </div>
-                      <footer class="card-footer">
-                            <g:submitButton name="update" class="button is-text card-footer-item" value="Update" />
-                      </footer>
+                <div class="card">
+                  <header class="card-header">
+                    <p class="card-header-title">Book info</p>
+                  </header>
+                  <div class="card-content">
+                    <div class="content">
+                        <f:display bean="book" order="['title', 'author', 'status', 'quantity', 'description']"/>
                     </div>
-                </g:form>
+                  </div>
+                    <g:form resource="${this.book}" method="DELETE">
+                      <footer class="card-footer">
+                            <g:link class="card-footer-item" action="edit" resource="${this.book}">Edit</g:link>
+                            <g:submitButton name="delete" class="button is-text card-footer-item" value="Delete" />
+                      </footer>
+                    </g:form>
+                </div>
             </div>
         </div>
     </body>

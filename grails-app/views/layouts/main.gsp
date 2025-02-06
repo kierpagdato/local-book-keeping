@@ -10,6 +10,7 @@
         <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
 
         <asset:stylesheet src="bookkeeping.css"/>
+        <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-6.5.2-web/css/all.min.css">
 
         <g:layoutHead/>
     </head>

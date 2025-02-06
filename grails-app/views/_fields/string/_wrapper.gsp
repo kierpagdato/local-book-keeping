@@ -1,6 +1,6 @@
 <div class="field">
-    <label class="label">${label}</label>
-    <div class="control ${invalid? 'has-icons-right':''}">
+    <label class="label ${invalid? 'has-text-danger' : ''}">${label + (required? '*' : '')}</label>
+    <div class="control ${invalid? 'has-icons-right' : ''}">
 
     <cin:input class="${invalid? 'is-danger':''}"
             placeholder="${label}"

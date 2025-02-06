@@ -1,5 +1,5 @@
 <div class="field">
-    <label class="label">${label}</label>
+    <label class="label ${invalid? 'has-text-danger' : ''}">${label + (required? '*' : '')}</label>
     <div class="control">
     <div class="select is-expanded ${invalid? 'is-danger':''}">
         <g:select name="${property}" id="${property}"
