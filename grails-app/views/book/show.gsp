@@ -28,7 +28,7 @@
                   </header>
                   <div class="card-content">
                     <div class="content">
-                        <f:display bean="book" order="['title', 'author', 'status', 'copy', 'description']"/>
+                        <f:display bean="book" order="['title', 'author', 'isbn', 'status',, 'description']"/>
                     </div>
                   </div>
                     <g:form resource="${this.book}" method="DELETE">

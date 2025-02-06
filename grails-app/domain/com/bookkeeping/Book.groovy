@@ -5,14 +5,17 @@ class Book {
     String title
     String author
 
+    String isbn
+
     Status status
 
-    int copy
 
     String description
 
     Date dateCreated
     Date lastUpdated
+
+    static hasMany = [borrow: Borrow]
 
     static mapping = {
         status enumType: 'string'
@@ -22,18 +25,21 @@ class Book {
     static constraints = {
         title maxSize: 50, nullable: false, blank: false
         author maxSize: 50, nullable: false, blank: false
+        isbn maxSize: 50, nullable: false, blank: false
         status nullable: false
-        copy min: 1
         description maxSize: 1000, nullable: false, blank: false
     }
 
     @Override
     String toString() {
-        "${title} : ${author} : ${copy} : ${description}"
+        "${title} : ${author} : ${isbn} : ${description}"
     }
 
     enum Status {
-        OUT("Out"), SHELVED("Shelved")
+        COMING("Coming"),
+        SHELVED("Shelved"),
+        OUT("Checked out"),
+        ARCHIVED("Archived")
 
         String text
 

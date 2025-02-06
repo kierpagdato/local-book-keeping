@@ -4,16 +4,39 @@ class User {
 
     String name
 
+    Date dateJoined
+
+    Role role
+
     Date dateCreated
     Date lastUpdated
 
-    static hasMany = [books: Book]
+    static hasMany = [borrow: Borrow, processedBorrow: Borrow]
+
+    static mappedBy = [borrow: "borrower", processedBorrow: "processor"]
+
+    static mapping = {
+        role enumType: 'string'
+    }
 
     static constraints = {
+        name maxSize: 50, nullable: false, blank: false
+        role nullable: false
+        dateJoined nullable: false
     }
 
     @Override
     String toString() {
-        name
+        "${name} : ${role.text} : ${dateJoined}"
+    }
+
+    enum Role {
+        USER("User"), LIBRARIAN("Librarian")
+
+        String text
+
+        Role(String text) {
+            this.text = text;
+        }
     }
 }

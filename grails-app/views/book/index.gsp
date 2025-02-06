@@ -7,12 +7,12 @@
 
         <div class="columns is-mobile is-centered">
 
-            <div class="column is-half">
+            <div class="column is-four-fifths">
 
                 <g:render template="breadcrumbs" model="[active:'list']"/>
 
                 <f:table collection="${list}"
-                    properties="${fieldProperties}" />
+                    properties="${fieldProperties}"/>
 
                 </br>
 

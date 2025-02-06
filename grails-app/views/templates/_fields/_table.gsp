@@ -1,4 +1,4 @@
-<table class="table is-hoverable">
+<table class="table is-hoverable is-fullwidth">
     <thead>
          <tr>
             <g:each in="${domainProperties}" var="p" status="i">
