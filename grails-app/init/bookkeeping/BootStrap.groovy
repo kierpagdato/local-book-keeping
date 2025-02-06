@@ -32,8 +32,8 @@ class BootStrap {
             bookDaoService.save(
                     new Book(title: b.title,
                             author: b.author,
-                            status: Book.Status.In,
-                            quantity: RandomUtils.randomize(3) + 1,
+                            status: Book.Status.SHELVED,
+                            copy: RandomUtils.randomize(3) + 1,
                             description: b.description))
         }
     }

@@ -21,7 +21,7 @@
                       </header>
                       <div class="card-content">
                         <div class="content">
-                            <f:all bean="book" order="['author','title', 'status', 'quantity', 'description']"/>
+                            <f:all bean="book" order="['author','title', 'status', 'copy', 'description']"/>
                         </div>
                       </div>
                       <footer class="card-footer">

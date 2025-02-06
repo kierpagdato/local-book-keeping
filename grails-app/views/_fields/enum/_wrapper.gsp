@@ -1,12 +1,13 @@
 <div class="field">
     <label class="label ${invalid? 'has-text-danger' : ''}">${label + (required? '*' : '')}</label>
     <div class="control">
-    <div class="select is-expanded ${invalid? 'is-danger':''}">
-        <g:select name="${property}" id="${property}"
-                  from="${type.values()}"
-                  key="${type.values()*.name()}"
-                  value="${value}"/>
-    </div>
+        <div class="select is-expanded ${invalid? 'is-danger':''}">
+            <g:select name="${property}" id="${property}"
+                      from="${type.values()}"
+                      key="${type.values()*.name()}"
+                      optionValue="text"
+                      value="${value}"/>
+        </div>
     </div>
 
     <g:if test="${invalid}">

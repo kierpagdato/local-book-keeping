@@ -17,7 +17,7 @@ class BookController {
         List<Book> bookList =bookDaoService.list(params);
         [list: bookList,
          count: bookList.getTotalCount(),
-         fieldProperties: ['title', 'author', 'status', 'quantity', 'dateCreated', 'lastUpdated']]
+         fieldProperties: ['title', 'author', 'status', 'copy', 'dateCreated', 'lastUpdated']]
     }
 
     def show(Long id) {

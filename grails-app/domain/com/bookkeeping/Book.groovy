@@ -7,7 +7,7 @@ class Book {
 
     Status status
 
-    int quantity
+    int copy
 
     String description
 
@@ -23,16 +23,22 @@ class Book {
         title maxSize: 50, nullable: false, blank: false
         author maxSize: 50, nullable: false, blank: false
         status nullable: false
-        quantity min: 1
+        copy min: 1
         description maxSize: 1000, nullable: false, blank: false
     }
 
     @Override
     String toString() {
-        "${title} : ${author} : ${quantity} : ${description}"
+        "${title} : ${author} : ${copy} : ${description}"
     }
 
     enum Status {
-        Out, In
+        OUT("Out"), SHELVED("Shelved")
+
+        String text
+
+        Status(String text) {
+            this.text = text;
+        }
     }
 }
