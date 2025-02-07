@@ -54,13 +54,14 @@
             </div>
 
             <div class="navbar-end">
-              <div class="navbar-item">
-                <div class="buttons">
-                  <a class="button is-primary">
-                    Log in
-                  </a>
-                </div>
-              </div>
+                <sec:ifNotLoggedIn>
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <g:link class="button is-primary" controller='login' action='auth'>Login</g:link>
+                        </div>
+                    </div>
+                </sec:ifNotLoggedIn>
+
             </div>
           </div>
         </nav>

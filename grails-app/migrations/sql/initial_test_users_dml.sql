@@ -1,6 +1,14 @@
-INSERT INTO `library_db`.`user` (`id`, `name`, `role`, `date_joined`, `version`, `date_created`, `last_updated`)
+INSERT INTO `library_db`.`user` (`id`, `username`, `password`, `enabled`, `email`, `first_name`, `last_name`, `account_expired`, `account_locked`, `password_expired`, `version`, `date_created`, `last_updated`)
 VALUES
-    ('1', 'John Doe', 'LIBRARIAN', '2025-02-07 00:39:49', '0', '2025-02-07 00:39:50', '2025-02-07 00:39:50'),
-    ('2', 'Emily Doe', 'USER', '2025-02-07 00:39:50', '0', '2025-02-07 00:39:50', '2025-02-07 00:39:50'),
-    ('3', 'Peter Doe', 'LIBRARIAN', '2025-02-07 00:39:50', '0', '2025-02-07 00:39:50', '2025-02-07 00:39:50'),
-    ('4', 'Kier Pag', 'LIBRARIAN', '2025-02-07 00:39:50', '0', '2025-02-07 00:39:50', '2025-02-07 00:39:50');
+    (1, 'librarian', '{bcrypt}$2a$10$8igghkx6olevd1DZusAZkuhb9QDMNm3byVwfCKsgrkhz2zYwbIDze', TRUE, 'librarian@gmail.com', 'Emily', 'Doe', FALSE, FALSE, FALSE, 0, NOW(), NOW()),
+    (2, 'johndoe', '{bcrypt}$2a$10$8igghkx6olevd1DZusAZkuhb9QDMNm3byVwfCKsgrkhz2zYwbIDze', TRUE, 'john.doe@gmail.com', 'John', 'Doe', FALSE, FALSE, FALSE, 0, NOW(), NOW());
+
+INSERT INTO `library_db`.`role` (`id`, `authority`, `version`, `date_created`, `last_updated`)
+VALUES
+    (1, 'ROLE_LIBRARIAN', 0, NOW(), NOW()),
+    (2, 'ROLE_USER', 0, NOW(), NOW());
+
+INSERT INTO `library_db`.`user_role` (`user_id`, `role_id`)
+VALUES
+    (1, 1),
+    (2,2);

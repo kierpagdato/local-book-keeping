@@ -1,5 +1,7 @@
 package com.bookkeeping
 
+import com.bookkeeping.security.User
+
 class Borrow {
 
 

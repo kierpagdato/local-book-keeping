@@ -1,6 +1,7 @@
 package com.bookkeeping
 
 import com.bookkeeping.dao.UserDaoService
+import com.bookkeeping.security.User
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 

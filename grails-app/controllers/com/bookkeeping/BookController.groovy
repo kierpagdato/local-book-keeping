@@ -1,10 +1,8 @@
 package com.bookkeeping
 
 import com.bookkeeping.dao.BookDaoService
-import grails.validation.ValidationException
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
-import static org.springframework.http.HttpStatus.OK
 
 class BookController {
 
@@ -14,7 +12,7 @@ class BookController {
 
     def index() {
         params.max = params?.max ?: 5
-        List<Book> bookList =bookDaoService.list(params);
+        List<Book> bookList = bookDaoService.list(params);
         [list: bookList,
          count: bookList.getTotalCount(),
          fieldProperties: ['title', 'author', 'isbn', 'status', 'dateCreated', 'lastUpdated']]

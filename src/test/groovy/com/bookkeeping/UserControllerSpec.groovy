@@ -1,6 +1,7 @@
 package com.bookkeeping
 
 import com.bookkeeping.dao.IUserDaoService
+import com.bookkeeping.security.User
 import grails.testing.gorm.DomainUnitTest
 import grails.testing.web.controllers.ControllerUnitTest
 import grails.validation.ValidationException
