@@ -27,3 +27,7 @@ Create a DAO/repository service class to manage database transactions with the e
 
 Create a service class for business logic processing wherein the function does not focus on a single entity and requires data processing for different domains
 
+#### Environment variables
+DB_USERNAME default sa
+DB_PASSWORD default
+DB_NAME 

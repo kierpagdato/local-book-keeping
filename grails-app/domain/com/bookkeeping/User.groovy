@@ -4,9 +4,9 @@ class User {
 
     String name
 
-    Date dateJoined
-
     Role role
+
+    Date dateJoined
 
     Date dateCreated
     Date lastUpdated
