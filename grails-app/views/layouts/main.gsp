@@ -54,6 +54,18 @@
             </div>
 
             <div class="navbar-end">
+                <sec:ifLoggedIn>
+                    <a class="navbar-item">
+                            Welcome Back <sec:loggedInUserInfo field='firstName'/>!
+                    </a>
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <form action="/logout" method="POST">
+                                <g:submitButton name="logout" class="button" value="Logout" />
+                            </form>
+                        </div>
+                    </div>
+                </sec:ifLoggedIn>
                 <sec:ifNotLoggedIn>
                     <div class="navbar-item">
                         <div class="buttons">
