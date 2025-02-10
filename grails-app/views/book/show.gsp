@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
+        <title>Book info</title>
     </head>
     <body>
 
@@ -9,7 +10,7 @@
 
             <div class="column is-half">
 
-                <g:render template="breadcrumbs" model="[active:'list']"/>
+                <g:render template="breadcrumbs" model="[active:'show']"/>
 
                 </br>
 

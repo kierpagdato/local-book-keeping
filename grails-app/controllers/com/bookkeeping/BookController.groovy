@@ -38,7 +38,10 @@ class BookController {
             return
         }
 
-        bookDaoService.save(book)
+        for(int i = 0; i < book.quantity; i++) {
+            book.id = null
+            bookDaoService.save(new Book(book.properties))
+        }
 
         redirect action:"index", params: [sort: "dateCreated", order: "desc"]
     }

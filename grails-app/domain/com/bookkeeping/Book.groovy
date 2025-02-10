@@ -2,6 +2,7 @@ package com.bookkeeping
 
 class Book {
 
+
     String title
     String author
 
@@ -15,6 +16,8 @@ class Book {
     Date dateCreated
     Date lastUpdated
 
+    int quantity
+
     static hasMany = [borrow: Borrow]
 
     static mapping = {
@@ -22,17 +25,20 @@ class Book {
         description type: 'text'
     }
 
+    static transients = ['quantity']
+
     static constraints = {
         title maxSize: 50, nullable: false, blank: false
         author maxSize: 50, nullable: false, blank: false
         isbn maxSize: 50, nullable: false, blank: false
         status nullable: false
         description maxSize: 1000, nullable: false, blank: false
+        quantity bindable: true, minSize: 1
     }
 
     @Override
     String toString() {
-        "${title} : ${author} : ${isbn} : ${description}"
+        "${id} : ${title} : ${author} : ${isbn} : ${description}"
     }
 
     enum Status {

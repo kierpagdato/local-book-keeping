@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
+        <title>Book list</title>
     </head>
     <body>
 

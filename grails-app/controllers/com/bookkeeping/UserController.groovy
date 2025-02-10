@@ -2,6 +2,7 @@ package com.bookkeeping
 
 import com.bookkeeping.dao.UserDaoService
 import com.bookkeeping.security.User
+import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
@@ -20,7 +21,8 @@ class UserController {
         respond userDaoService.get(id)
     }
 
-    def create() {
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    def register() {
         respond new User(params)
     }
 
@@ -33,7 +35,7 @@ class UserController {
         try {
             userDaoService.save(user)
         } catch (ValidationException e) {
-            respond user.errors, view:'create'
+            respond user.errors, view:'register'
             return
         }
 

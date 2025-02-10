@@ -51,7 +51,8 @@
                                 </div>
                             </div>
                             <footer class="card-footer">
-                                <g:submitButton name="login" class="button is-text card-footer-item" value="Login" />
+                                <g:submitButton name="login" class="button is-text card-footer-item" value="Login"/>
+                                <g:link class="card-footer-item" action="register" controller="user">Register</g:link>
                             </footer>
                         </div>
                     </form>
