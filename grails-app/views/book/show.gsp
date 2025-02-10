@@ -9,7 +9,7 @@
 
             <div class="column is-half">
 
-                <g:render template="breadcrumbs" model="[active:'show']"/>
+                <g:render template="breadcrumbs" model="[active:'list']"/>
 
                 </br>
 
@@ -28,7 +28,7 @@
                   </header>
                   <div class="card-content">
                     <div class="content">
-                        <f:display bean="book" order="['title', 'author', 'isbn', 'status',, 'description']"/>
+                        <f:display bean="book" order="['title', 'author', 'isbn', 'status', 'description']"/>
                     </div>
                   </div>
                     <g:form resource="${this.book}" method="DELETE">

@@ -1,6 +1,6 @@
 <ol class="${domainClass.decapitalizedName}">
     <g:each in="${domainProperties}" var="p">
-        <li">
+        <li>
             <span id="${p.name}-label">
                 <strong>
                     <g:message code="${domainClass.decapitalizedName}.${p.name}.label" default="${p.defaultLabel}" />

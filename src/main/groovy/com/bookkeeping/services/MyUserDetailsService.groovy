@@ -32,8 +32,8 @@ class MyUserDetailsService implements GrailsUserDetailsService {
         }
 
         return new MyUserDetails(user.username, user.password, user.enabled,
-                user.accountExpired, user.passwordExpired,
-                user.accountLocked, authorities ?: NO_ROLES, user.id,
+                !user.accountExpired, !user.passwordExpired,
+                !user.accountLocked, authorities ?: NO_ROLES, user.id,
                 user.email, user.firstName, user.lastName)
     }
 }

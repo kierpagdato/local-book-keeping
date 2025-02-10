@@ -1,6 +1,7 @@
 package com.bookkeeping
 
 import com.bookkeeping.dao.BookDaoService
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
 
@@ -10,22 +11,26 @@ class BookController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured('permitAll')
     def index() {
-        params.max = params?.max ?: 5
+        params.max = params?.max ?: 10
         List<Book> bookList = bookDaoService.list(params);
         [list: bookList,
          count: bookList.getTotalCount(),
-         fieldProperties: ['title', 'author', 'isbn', 'status', 'dateCreated', 'lastUpdated']]
+         fieldProperties: ['id', 'title', 'author', 'isbn', 'status', 'dateCreated', 'lastUpdated']]
     }
 
+    @Secured('permitAll')
     def show(Long id) {
         respond bookDaoService.get(id)
     }
 
+    @Secured('ROLE_LIBRARIAN')
     def create() {
         respond new Book(params)
     }
 
+    @Secured('ROLE_LIBRARIAN')
     def save(Book book) {
 
         if(!book.validate()) {
@@ -38,10 +43,12 @@ class BookController {
         redirect action:"index", params: [sort: "dateCreated", order: "desc"]
     }
 
+    @Secured('ROLE_LIBRARIAN')
     def edit(Long id) {
         respond bookDaoService.get(id)
     }
 
+    @Secured('ROLE_LIBRARIAN')
     def update(Book book) {
 
         if(!book.validate()) {
@@ -54,6 +61,7 @@ class BookController {
         redirect action:"index", params: [sort: "lastUpdated", order: "desc"]
     }
 
+    @Secured('ROLE_LIBRARIAN')
     def delete(Long id) {
         bookDaoService.delete(id)
         redirect action:"index"
