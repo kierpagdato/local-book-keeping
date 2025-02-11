@@ -100,6 +100,7 @@ class UserController {
 
         try {
             userDaoService.save(user)
+            userDaoService.setRoles(user, params.getList('roles'))
         } catch (ValidationException e) {
             respond user.errors, view:'edit'
             return

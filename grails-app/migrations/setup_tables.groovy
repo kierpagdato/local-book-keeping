@@ -145,6 +145,10 @@ databaseChangeLog = {
                 constraints(nullable: "false")
             }
 
+            column(name: "text", type: "VARCHAR(255)") {
+                constraints(nullable: "false")
+            }
+
             column(name: "version", type: "BIGINT") {
                 constraints(nullable: "false")
             }

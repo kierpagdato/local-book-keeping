@@ -6,6 +6,7 @@
         <g:sortableColumn property="lastName" title="Last Name" />
         <g:sortableColumn property="username" title="Username" />
         <g:sortableColumn property="enabled" title="Enabled" />
+        <th>Role</th>
         <g:sortableColumn property="dateCreated" title="Date created" />
         <g:sortableColumn property="lastUpdated" title="Last updated" />
     </tr>
@@ -38,6 +39,11 @@
                         <i class="fas fa-ban"></i>
                     </span>
                 </g:else>
+            </td>
+            <td>
+                <g:each in="${bean.authorities}" var="auth">
+                    ${auth.text}
+                </g:each>
             </td>
             <td>
                 ${bean.dateCreated}

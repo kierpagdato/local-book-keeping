@@ -1,3 +1,4 @@
+<%@ page import="com.bookkeeping.security.Role" %>
 <div class="field">
     <label class="label ${hasErrors(field: 'firstName', bean: user, 'has-text-danger')}">First name</label>
     <div class="control ${hasErrors(field: 'firstName', bean: user, 'has-icons-right')}">
@@ -71,4 +72,29 @@
     <div class="control ${hasErrors(field: 'enabled', bean: user, 'has-icons-right')}">
         <g:checkBox type="checkbox" name="enabled" id="enabled" checked="${user.enabled}"/>
     </div>
+</div>
+
+
+<div class="field">
+    <label class="label ${hasErrors(field: 'authorities', bean: user, 'has-text-danger')}">Role</label>
+    <div class="control ${hasErrors(field: 'authorities', bean: user, 'has-icons-right')}">
+        <div class="select is-multiple ${hasErrors(field: 'authorities', bean: user, 'is-danger')} ">
+            <g:select name="roles" id="roles"
+                      from="${Role.list()}"
+                      optionKey="id"
+                      optionValue="text"
+                      multiple="multiple"
+                      value="${user.authorities}"/>
+        </div>
+
+        <g:hasErrors bean="${user}" field="authorities">
+            <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+            </span>
+        </g:hasErrors>
+    </div>
+
+    <g:hasErrors bean="${user}" field="authorities">
+        <p class="help is-danger">${user.errors.getFieldErrors("authorities")}</p>
+    </g:hasErrors>
 </div>

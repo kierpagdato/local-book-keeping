@@ -4,7 +4,7 @@
         <meta name="layout" content="main" />
         <title>User info</title>
         <style>
-        ol li {
+        ol > li {
             list-style-type: none;
         }
         </style>
@@ -80,6 +80,20 @@
                                                 <i class="fas fa-ban"></i>
                                             </span>
                                         </g:else>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span>
+                                        <strong>
+                                            Role
+                                        </strong>
+                                    </span>
+                                    <div>
+                                        <g:each in="${user.authorities}" var="auth">
+                                            <ul>
+                                                <li>${auth.text}</li>
+                                            </ul>
+                                        </g:each>
                                     </div>
                                 </li>
                             </ol>
