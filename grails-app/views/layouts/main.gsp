@@ -78,7 +78,22 @@
           </div>
         </nav>
 
-        <g:layoutBody/>
+    <div class="columns ml-4 mr-4 mt-2">
+
+        <sec:ifLoggedIn>
+            <div id="app-sidebar-column"
+                 class="column is-2 is-hidden-touch">
+                <g:include view="/layouts/_sidebar.gsp"/>
+            </div>
+        </sec:ifLoggedIn>
+
+        <div class="column pt-0">
+
+            <g:layoutBody/>
+
+        </div>
+
+    </div> <!-- columns -->
 
         <footer class="footer">
           <div class="content has-text-centered">
