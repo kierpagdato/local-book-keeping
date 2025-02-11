@@ -15,11 +15,16 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured('ROLE_LIBRARIAN')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond userDaoService.list(params), model:[userCount: userDaoService.count()]
+
+        List<User> userList = userDaoService.list(params)
+        [list: userList,
+         count: userList.getTotalCount()]
     }
 
+    @Secured('ROLE_LIBRARIAN')
     def show(Long id) {
         respond userDaoService.get(id)
     }
@@ -75,11 +80,12 @@ class UserController {
         }
     }
 
+    @Secured('ROLE_LIBRARIAN')
     def edit(Long id) {
         respond userDaoService.get(id)
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
+    @Secured(['ROLE_LIBRARIAN'])
     def update(User user) {
 
         if (user == null) {
@@ -87,23 +93,22 @@ class UserController {
             return
         }
 
-        try {
-            userDaoService.save(user)
-            springSecurityService.reauthenticate(user.username)
-        } catch (ValidationException e) {
-            respond user.errors, view:'/account/edit'
+        if(!user.validate()) {
+            render view: 'edit', model: [user: user]
             return
         }
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect action: "myDetails", method: "GET"
-            }
-            '*'{ respond user, [status: OK] }
+        try {
+            userDaoService.save(user)
+        } catch (ValidationException e) {
+            respond user.errors, view:'edit'
+            return
         }
+
+        redirect action:"index", params: [sort: "lastUpdated", order: "desc"]
     }
 
+    @Secured('ROLE_LIBRARIAN')
     def delete(Long id) {
         if (id == null) {
             notFound()

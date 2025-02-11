@@ -2,38 +2,99 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <title>User info</title>
+        <style>
+        ol li {
+            list-style-type: none;
+        }
+        </style>
     </head>
     <body>
-    <div id="content" role="main">
-        <div class="container">
-            <section class="row">
-                <a href="#show-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-                <div class="nav" role="navigation">
-                    <ul>
-                        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                        <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-                    </ul>
+
+        <div class="columns is-mobile is-centered">
+
+            <div class="column is-half">
+
+                <div class="tags">
+                    <span class="tag is-light">
+                        <strong>Create date:</strong> ${this.user.dateCreated}
+                    </span>
+                    <span class="tag is-light">
+                        <strong>Last modified date:</strong> ${this.user.lastUpdated}
+                    </span>
                 </div>
-            </section>
-            <section class="row">
-                <div id="show-user" class="col-12 content scaffold-show" role="main">
-                    <h1><g:message code="default.show.label" args="[entityName]" /></h1>
-                    <g:if test="${flash.message}">
-                    <div class="message" role="status">${flash.message}</div>
-                    </g:if>
-                    <f:display bean="user" />
-                    <g:form resource="${this.user}" method="DELETE">
-                        <fieldset class="buttons">
-                            <g:link class="edit" action="edit" resource="${this.user}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                            <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                        </fieldset>
-                    </g:form>
+
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">User info</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            <ol>
+                                <li>
+                                    <span>
+                                        <strong>
+                                            First name
+                                        </strong>
+                                    </span>
+                                    <div>${user.firstName}</div>
+                                </li>
+                                <li>
+                                    <span>
+                                        <strong>
+                                            Last name
+                                        </strong>
+                                    </span>
+                                    <div>${user.lastName}</div>
+                                </li>
+                                <li>
+                                    <span>
+                                        <strong>
+                                            Email
+                                        </strong>
+                                    </span>
+                                    <div>${user.email}</div>
+                                </li>
+                                <li>
+                                    <span>
+                                        <strong>
+                                            Username
+                                        </strong>
+                                    </span>
+                                    <div>${user.username}</div>
+                                </li>
+                                <li>
+                                    <span>
+                                        <strong>
+                                            Enabled
+                                        </strong>
+                                    </span>
+                                    <div>
+                                        <g:if test="${user.enabled}">
+                                            <span class="icon has-text-success">
+                                                <i class="fas fa-check-square"></i>
+                                            </span>
+                                        </g:if>
+                                        <g:else>
+                                            <span class="icon has-text-danger">
+                                                <i class="fas fa-ban"></i>
+                                            </span>
+                                        </g:else>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <sec:ifAnyGranted roles="ROLE_LIBRARIAN">
+                        <g:form resource="${this.user}" method="DELETE">
+                            <footer class="card-footer">
+                                <g:link class="card-footer-item" action="edit" resource="${this.user}">Edit</g:link>
+                                <g:submitButton name="delete" class="button is-text card-footer-item" value="Delete" />
+                            </footer>
+                        </g:form>
+                    </sec:ifAnyGranted>
                 </div>
-            </section>
+            </div>
         </div>
-    </div>
     </body>
 </html>

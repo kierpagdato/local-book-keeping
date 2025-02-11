@@ -14,7 +14,7 @@ class BookController {
     @Secured('permitAll')
     def index() {
         params.max = params?.max ?: 10
-        List<Book> bookList = bookDaoService.list(params);
+        List<Book> bookList = bookDaoService.list(params)
         [list: bookList,
          count: bookList.getTotalCount()]
     }

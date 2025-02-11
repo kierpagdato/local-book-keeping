@@ -9,6 +9,7 @@ import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.OK
 
+@Secured(['IS_AUTHENTICATED_FULLY'])
 class AccountController {
 
     UserDaoService userDaoService
@@ -18,18 +19,21 @@ class AccountController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def edit() {
         User user = springSecurityService.currentUser as User
         respond user
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def update(User user) {
         User secUser = springSecurityService.currentUser as User
 
         if (user == null || secUser.id != user.id) {
             notFound()
+            return
+        }
+
+        if(!user.validate()) {
+            render view: 'edit', model: [user: user]
             return
         }
 
