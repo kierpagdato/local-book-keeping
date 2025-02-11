@@ -13,7 +13,7 @@
 
                 <g:render template="breadcrumbs" model="[active:'add']"/>
 
-                </br>
+                <br>
 
                 <g:form resource="${this.book}" method="POST">
 
@@ -39,7 +39,7 @@
                                 </div>
 
                                 <g:hasErrors bean="${book}" field="quantity">
-                                    <p class="help is-danger">${book.errors.getFieldErrors("quantity")}</p>
+                                    <p class="help is-danger"><g:fieldError bean="${book}" field="quantity" /></p>
                                 </g:hasErrors>
                             </div>
                         </div>

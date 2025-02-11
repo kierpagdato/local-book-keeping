@@ -12,7 +12,7 @@
     </div>
 
     <g:hasErrors bean="${book}" field="title">
-        <p class="help is-danger">${book.errors.getFieldErrors("title")}</p>
+        <p class="help is-danger"><g:fieldError bean="${book}" field="title" /></p>
     </g:hasErrors>
 </div>
 
@@ -29,7 +29,7 @@
     </div>
 
     <g:hasErrors bean="${book}" field="author">
-        <p class="help is-danger">${book.errors.getFieldErrors("author")}</p>
+        <p class="help is-danger"><g:fieldError bean="${book}" field="author" /></p>
     </g:hasErrors>
 </div>
 
@@ -46,7 +46,7 @@
     </div>
 
     <g:hasErrors bean="${book}" field="isbn">
-        <p class="help is-danger">${book.errors.getFieldErrors("isbn")}</p>
+        <p class="help is-danger"><g:fieldError bean="${book}" field="isbn" /></p>
     </g:hasErrors>
 </div>
 
@@ -69,7 +69,7 @@
     </div>
 
     <g:hasErrors bean="${book}" field="status">
-        <p class="help is-danger">${book.errors.getFieldErrors("status")}</p>
+        <p class="help is-danger"><g:fieldError bean="${book}" field="status" /></p>
     </g:hasErrors>
 </div>
 
@@ -86,6 +86,6 @@
     </div>
 
     <g:hasErrors bean="${book}" field="description">
-        <p class="help is-danger">${book.errors.getFieldErrors("description")}</p>
+        <p class="help is-danger"><g:fieldError bean="${book}" field="description" /></p>
     </g:hasErrors>
 </div>

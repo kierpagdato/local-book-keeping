@@ -12,7 +12,7 @@
 
                 <g:render template="breadcrumbs" model="[active:'show']"/>
 
-                </br>
+                <br>
 
                 <div class="tags">
                     <span class="tag is-light">

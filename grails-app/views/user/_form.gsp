@@ -22,6 +22,6 @@
     </div>
 
     <g:hasErrors bean="${user}" field="authorities">
-        <p class="help is-danger">${user.errors.getFieldErrors("authorities")}</p>
+        <p class="help is-danger"><g:fieldError bean="${user}" field="authorities" /></p>
     </g:hasErrors>
 </div>

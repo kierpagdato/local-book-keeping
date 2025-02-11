@@ -50,7 +50,7 @@
                                     </div>
 
                                     <g:hasErrors bean="${user}" field="firstName">
-                                        <p class="help is-danger">${book.errors.getFieldErrors("firstName")}</p>
+                                        <p class="help is-danger"><g:fieldError bean="${user}" field="firstName" /></p>
                                     </g:hasErrors>
                                 </div>
 
@@ -68,14 +68,14 @@
                                     </div>
 
                                     <g:hasErrors bean="${user}" field="lastName">
-                                        <p class="help is-danger">${book.errors.getFieldErrors("lastName")}</p>
+                                        <p class="help is-danger"><g:fieldError bean="${user}" field="lastName" /></p>
                                     </g:hasErrors>
                                 </div>
 
                                 <div class="field">
                                     <label class="label ${hasErrors(field: 'email', bean: user, 'has-text-danger')}">Email</label>
                                     <div class="control ${hasErrors(field: 'email', bean: user, 'has-icons-right')}">
-                                        <g:field class="input ${hasErrors(field: 'email', bean: user, 'is-danger')}" type="text"
+                                        <g:field class="input ${hasErrors(field: 'email', bean: user, 'is-danger')}" type="email"
                                                  name="email" id="email" placeholder="Email" value="${user.email}"/>
 
                                         <g:hasErrors bean="${user}" field="email">
@@ -86,7 +86,7 @@
                                     </div>
 
                                     <g:hasErrors bean="${user}" field="email">
-                                        <p class="help is-danger">${book.errors.getFieldErrors("email")}</p>
+                                        <p class="help is-danger"><g:fieldError bean="${user}" field="email" /></p>
                                     </g:hasErrors>
                                 </div>
 
@@ -103,7 +103,7 @@
                                     </div>
 
                                     <g:hasErrors bean="${user}" field="username">
-                                        <p class="help is-danger">${book.errors.getFieldErrors("username")}</p>
+                                        <p class="help is-danger"><g:fieldError bean="${user}" field="username" /></p>
                                     </g:hasErrors>
                                 </div>
 
@@ -113,6 +113,12 @@
                             <g:submitButton name="updateMyDetails" class="button is-text card-footer-item" value="Update" />
                         </footer>
                     </div>
+                </g:form>
+
+                <br>
+
+                <g:form controller="account" action="delete" id="${user.id}" method="DELETE">
+                    <g:submitButton name="delete" class="button is-fullwidth is-warning" value="Delete account" />
                 </g:form>
             </div>
         </div>

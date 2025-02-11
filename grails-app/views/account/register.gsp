@@ -6,14 +6,13 @@
     </head>
     <body>
     <div class="columns is-mobile is-centered">
-
         <div class="column is-half">
 
-            <g:form resource="${this.user}" action="saveUser" method="POST">
+            <g:form controller="account" action="save" method="POST">
 
                 <div class="card">
                     <header class="card-header">
-                        <p class="card-header-title">Registration form</p>
+                        <p class="card-header-title">Register</p>
                     </header>
                     <div class="card-content">
                         <div class="content">
@@ -31,7 +30,7 @@
                                 </div>
 
                                 <g:hasErrors bean="${user}" field="firstName">
-                                    <p class="help is-danger">${user.errors.getFieldErrors("firstName")}</p>
+                                    <p class="help is-danger"><g:fieldError bean="${user}" field="firstName" /></p>
                                 </g:hasErrors>
                             </div>
 
@@ -48,7 +47,7 @@
                                 </div>
 
                                 <g:hasErrors bean="${user}" field="lastName">
-                                    <p class="help is-danger">${user.errors.getFieldErrors("lastName")}</p>
+                                    <p class="help is-danger"><g:fieldError bean="${user}" field="lastName" /></p>
                                 </g:hasErrors>
                             </div>
 
@@ -65,7 +64,7 @@
                                 </div>
 
                                 <g:hasErrors bean="${user}" field="email">
-                                    <p class="help is-danger">${user.errors.getFieldErrors("email")}</p>
+                                    <p class="help is-danger"><g:fieldError bean="${user}" field="email" /></p>
                                 </g:hasErrors>
                             </div>
 
@@ -82,7 +81,7 @@
                                 </div>
 
                                 <g:hasErrors bean="${user}" field="username">
-                                    <p class="help is-danger">${user.errors.getFieldErrors("username")}</p>
+                                    <p class="help is-danger"><g:fieldError bean="${user}" field="username" /></p>
                                 </g:hasErrors>
                             </div>
 
@@ -99,7 +98,7 @@
                                 </div>
 
                                 <g:hasErrors bean="${user}" field="password">
-                                    <p class="help is-danger">${user.errors.getFieldErrors("password")}</p>
+                                    <p class="help is-danger"><g:fieldError bean="${user}" field="password" /></p>
                                 </g:hasErrors>
                             </div>
 

@@ -12,6 +12,7 @@ class UrlMappings {
 //        "/"(view:"/index")
         "/"(controller: 'book', action: 'index')
         "500"(view:'/error')
+        "400"(view:'/badRequest')
         "404"(view:'/notFound')
     }
 }

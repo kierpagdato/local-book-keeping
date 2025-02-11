@@ -34,26 +34,4 @@ abstract class UserDaoService implements IUserDaoService {
         return savedUser
     }
 
-    User setRoles(User currentUser, List<String> roles) {
-
-        log.debug "Setting new roles ${roles}"
-
-        List<Role> oldRoles = currentUser.authorities as List
-        List<Role> newRoles = Role.getAll(roles)
-
-        List<Role> toRemove = oldRoles - newRoles
-        List<Role> toAdd = newRoles - oldRoles
-
-        for(Role r in toRemove) {
-            boolean  res = UserRole.remove(currentUser, r)
-            log.trace "Role removed ${r.text} result ${res}"
-        }
-
-        for(Role r in toAdd) {
-            boolean  res = UserRole.create(currentUser, r)
-            log.trace "Role added ${r.text} result ${res}"
-        }
-
-        return currentUser
-    }
 }
