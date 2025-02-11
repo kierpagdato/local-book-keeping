@@ -1,9 +1,8 @@
 package com.bookkeeping
 
 import com.bookkeeping.dao.UserDaoService
-import com.bookkeeping.security.Role
 import com.bookkeeping.security.User
-import com.bookkeeping.security.UserRole
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
@@ -11,6 +10,8 @@ import static org.springframework.http.HttpStatus.*
 class UserController {
 
     UserDaoService userDaoService
+
+    SpringSecurityService springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -78,7 +79,9 @@ class UserController {
         respond userDaoService.get(id)
     }
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def update(User user) {
+
         if (user == null) {
             notFound()
             return
@@ -86,15 +89,16 @@ class UserController {
 
         try {
             userDaoService.save(user)
+            springSecurityService.reauthenticate(user.username)
         } catch (ValidationException e) {
-            respond user.errors, view:'edit'
+            respond user.errors, view:'/account/edit'
             return
         }
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+                redirect action: "myDetails", method: "GET"
             }
             '*'{ respond user, [status: OK] }
         }

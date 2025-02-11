@@ -55,9 +55,9 @@
 
             <div class="navbar-end">
                 <sec:ifLoggedIn>
-                    <a class="navbar-item">
+                    <g:link class="navbar-item" controller='account' action='edit'>
                             Welcome Back <sec:loggedInUserInfo field='firstName'/>!
-                    </a>
+                    </g:link>
                     <div class="navbar-item">
                         <div class="buttons">
                             <form action="/logout" method="POST">

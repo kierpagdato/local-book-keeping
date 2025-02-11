@@ -18,7 +18,6 @@
                             </span>
                         </div>
                         <br>
-
                     </g:if>
 
                     <form action="${postUrl ?: '/login/authenticate'}" method="POST">
