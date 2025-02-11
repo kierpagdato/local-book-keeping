@@ -3,15 +3,15 @@
     <li class="${active == 'list'?'is-active':''}">
         <g:link class="${active == 'list'?'has-text-black':''}" action="index">Book list</g:link>
     </li>
-    <sec:ifLoggedIn>
+    <sec:ifAnyGranted roles="ROLE_LIBRARIAN">
         <li class="${active == 'add'?'is-active':''}">
             <g:link class="${active == 'add'?'has-text-black':''}" action="create">Add book</g:link>
         </li>
-        <g:if test="${active == 'show'}">
-            <li class="${active == 'show'?'is-active':''}">
-                <g:link class="${active == 'show'?'has-text-black':''}" action="create">Book info</g:link>
-            </li>
-        </g:if>
-    </sec:ifLoggedIn>
+    </sec:ifAnyGranted>
+    <g:if test="${active == 'show'}">
+        <li class="${active == 'show'?'is-active':''}">
+            <g:link class="${active == 'show'?'has-text-black':''}" action="create">Book info</g:link>
+        </li>
+    </g:if>
   </ul>
 </nav>

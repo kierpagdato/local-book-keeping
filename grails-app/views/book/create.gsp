@@ -27,7 +27,7 @@
                             <div class="field">
                                 <label class="label ${hasErrors(field: 'title', bean: book, 'has-text-danger')}">Title</label>
                                 <div class="control ${hasErrors(field: 'title', bean: book, 'has-icons-right')}">
-                                    <g:field class="input" type="text" name="title" id="title" placeholder="Title" value="${book.title}"/>
+                                    <g:field class="input ${hasErrors(field: 'title', bean: book, 'is-danger')}" type="text" name="title" id="title" placeholder="Title" value="${book.title}"/>
 
                                     <g:hasErrors bean="${book}" field="title">
                                         <span class="icon is-small is-right">
@@ -44,7 +44,7 @@
                             <div class="field">
                                 <label class="label ${hasErrors(field: 'author', bean: book, 'has-text-danger')}">Author</label>
                                 <div class="control ${hasErrors(field: 'author', bean: book, 'has-icons-right')}">
-                                    <g:field class="input" type="text" name="author" id="author" placeholder="Author" value="${book.author}"/>
+                                    <g:field class="input ${hasErrors(field: 'author', bean: book, 'is-danger')}" type="text" name="author" id="author" placeholder="Author" value="${book.author}"/>
 
                                     <g:hasErrors bean="${book}" field="author">
                                         <span class="icon is-small is-right">
@@ -61,7 +61,7 @@
                             <div class="field">
                                 <label class="label ${hasErrors(field: 'isbn', bean: book, 'has-text-danger')}">ISBN</label>
                                 <div class="control ${hasErrors(field: 'isbn', bean: book, 'has-icons-right')}">
-                                    <g:field class="input" type="text" name="isbn" id="isbn" placeholder="ISBN" value="${book.isbn}"/>
+                                    <g:field class="input ${hasErrors(field: 'isbn', bean: book, 'is-danger')}" type="text" name="isbn" id="isbn" placeholder="ISBN" value="${book.isbn}"/>
 
                                     <g:hasErrors bean="${book}" field="isbn">
                                         <span class="icon is-small is-right">
@@ -101,7 +101,7 @@
                             <div class="field">
                                 <label class="label ${hasErrors(field: 'description', bean: book, 'has-text-danger')}">Description</label>
                                 <div class="control ${hasErrors(field: 'description', bean: book, 'has-icons-right')}">
-                                    <g:textArea class="textarea" name="description" id="description" placeholder="Description" value="${book.description}"/>
+                                    <g:textArea class="textarea ${hasErrors(field: 'description', bean: book, 'is-danger')}" name="description" id="description" placeholder="Description" value="${book.description}"/>
 
                                     <g:hasErrors bean="${book}" field="description">
                                         <span class="icon is-small is-right">
@@ -118,7 +118,7 @@
                             <div class="field">
                                 <label class="label ${hasErrors(field: 'quantity', bean: book, 'has-text-danger')}">Quantity</label>
                                 <div class="control ${hasErrors(field: 'quantity', bean: book, 'has-icons-right')}">
-                                    <g:field class="input" type="number" name="quantity" id="quantity" placeholder="Quantity" value="${book.quantity}" min="1"/>
+                                    <g:field class="input ${hasErrors(field: 'quantity', bean: book, 'is-danger')}" type="number" name="quantity" id="quantity" placeholder="Quantity" value="${book.quantity}" min="1"/>
 
                                     <g:hasErrors bean="${book}" field="quantity">
                                         <span class="icon is-small is-right">

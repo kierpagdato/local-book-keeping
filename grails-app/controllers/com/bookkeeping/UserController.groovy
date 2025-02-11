@@ -1,7 +1,9 @@
 package com.bookkeeping
 
 import com.bookkeeping.dao.UserDaoService
+import com.bookkeeping.security.Role
 import com.bookkeeping.security.User
+import com.bookkeeping.security.UserRole
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
@@ -21,8 +23,33 @@ class UserController {
         respond userDaoService.get(id)
     }
 
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def register() {
         respond new User(params)
+    }
+
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    def saveUser(User user) {
+
+        if(!user.validate()) {
+            render(view: 'register', model: [user: user])
+            return
+        }
+
+        try {
+            userDaoService.saveUser(user)
+        } catch (ValidationException e) {
+            respond user.errors, view:'register'
+            return
+        }
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User')])
+                redirect uri: '/login/auth'
+            }
+            '*' { respond user, [status: CREATED] }
+        }
     }
 
     def save(User user) {

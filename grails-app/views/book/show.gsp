@@ -78,12 +78,14 @@
                         </ol>
                     </div>
                   </div>
-                    <g:form resource="${this.book}" method="DELETE">
-                      <footer class="card-footer">
-                            <g:link class="card-footer-item" action="edit" resource="${this.book}">Edit</g:link>
-                            <g:submitButton name="delete" class="button is-text card-footer-item" value="Delete" />
-                      </footer>
-                    </g:form>
+                    <sec:ifAnyGranted roles="ROLE_LIBRARIAN">
+                        <g:form resource="${this.book}" method="DELETE">
+                          <footer class="card-footer">
+                                <g:link class="card-footer-item" action="edit" resource="${this.book}">Edit</g:link>
+                                <g:submitButton name="delete" class="button is-text card-footer-item" value="Delete" />
+                          </footer>
+                        </g:form>
+                    </sec:ifAnyGranted>
                 </div>
             </div>
         </div>
