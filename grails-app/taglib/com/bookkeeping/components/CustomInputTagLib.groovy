@@ -3,6 +3,10 @@ package com.bookkeeping.components
 import com.bookkeeping.config.InputConfigService
 import com.bookkeeping.utils.MapUtils
 
+/**
+ * Stopped using fields plugin
+ */
+@Deprecated
 class CustomInputTagLib {
 
     static namespace = "cin"

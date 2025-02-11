@@ -36,8 +36,11 @@ class User implements Serializable {
     }
 
     static constraints = {
-        password blank: false, password: true
         username blank: false, unique: true
+        password blank: false, password: true
+        firstName maxSize: 50, nullable: false, blank: false
+        lastName maxSize: 50, nullable: false, blank: false
+        email maxSize: 50, nullable: false, blank: false, email: true
     }
 
     Set<Role> getAuthorities() {

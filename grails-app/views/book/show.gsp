@@ -3,6 +3,11 @@
     <head>
         <meta name="layout" content="main" />
         <title>Book info</title>
+        <style>
+            ol li {
+                list-style-type: none;
+            }
+        </style>
     </head>
     <body>
 
@@ -29,7 +34,48 @@
                   </header>
                   <div class="card-content">
                     <div class="content">
-                        <f:display bean="book" order="['title', 'author', 'isbn', 'status', 'description']"/>
+                        <ol>
+                            <li>
+                                <span>
+                                    <strong>
+                                        Title
+                                    </strong>
+                                </span>
+                                <div>${book.title}</div>
+                            </li>
+                            <li>
+                                <span>
+                                    <strong>
+                                        Author
+                                    </strong>
+                                </span>
+                                <div>${book.author}</div>
+                            </li>
+                            <li>
+                                <span>
+                                    <strong>
+                                        ISBN
+                                    </strong>
+                                </span>
+                                <div>${book.isbn}</div>
+                            </li>
+                            <li>
+                                <span>
+                                    <strong>
+                                        Status
+                                    </strong>
+                                </span>
+                                <div>${book.status?.text}</div>
+                            </li>
+                            <li>
+                                <span>
+                                    <strong>
+                                        Description
+                                    </strong>
+                                </span>
+                                <div>${book.description}</div>
+                            </li>
+                        </ol>
                     </div>
                   </div>
                     <g:form resource="${this.book}" method="DELETE">

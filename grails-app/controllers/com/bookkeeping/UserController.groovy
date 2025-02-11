@@ -21,7 +21,6 @@ class UserController {
         respond userDaoService.get(id)
     }
 
-    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def register() {
         respond new User(params)
     }

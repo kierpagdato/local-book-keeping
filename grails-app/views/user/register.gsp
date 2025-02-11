@@ -2,45 +2,31 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-        <title><g:message code="default.create.label" args="[entityName]" /></title>
+        <title>Register</title>
     </head>
     <body>
-    <div id="content" role="main">
-        <div class="container">
-            <section class="row">
-                <a href="#create-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-                <div class="nav" role="navigation">
-                    <ul>
-                        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                    </ul>
+    <div class="columns is-mobile is-centered">
+
+        <div class="column is-half">
+
+            <g:form resource="${this.user}" action="register" method="POST">
+
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">Registration form</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            <f:all bean="user" order="['firstName','lastName', 'email', 'username', 'password']"/>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <g:submitButton name="create" class="button is-text card-footer-item" value="Register" />
+                    </footer>
                 </div>
-            </section>
-            <section class="row">
-                <div id="create-user" class="col-12 content scaffold-create" role="main">
-                    <h1><g:message code="default.create.label" args="[entityName]" /></h1>
-                    <g:if test="${flash.message}">
-                    <div class="message" role="status">${flash.message}</div>
-                    </g:if>
-                    <g:hasErrors bean="${this.user}">
-                    <ul class="errors" role="alert">
-                        <g:eachError bean="${this.user}" var="error">
-                        <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                        </g:eachError>
-                    </ul>
-                    </g:hasErrors>
-                    <g:form resource="${this.user}" method="POST">
-                        <fieldset class="form">
-                            <f:all bean="user"/>
-                        </fieldset>
-                        <fieldset class="buttons">
-                            <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                        </fieldset>
-                    </g:form>
-                </div>
-            </section>
+            </g:form>
         </div>
     </div>
+
     </body>
 </html>

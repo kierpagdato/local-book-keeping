@@ -1,5 +1,8 @@
 package com.bookkeeping
 
+import groovy.transform.ToString
+
+@ToString(includeNames=true, includePackage=false)
 class Book {
 
 
@@ -36,10 +39,10 @@ class Book {
         quantity bindable: true, minSize: 1
     }
 
-    @Override
-    String toString() {
-        "${id} : ${title} : ${author} : ${isbn} : ${description}"
-    }
+//    @Override
+//    String toString() {
+//        "${id} : ${title} : ${author} : ${isbn} : ${status} : ${description}"
+//    }
 
     enum Status {
         COMING("Coming"),

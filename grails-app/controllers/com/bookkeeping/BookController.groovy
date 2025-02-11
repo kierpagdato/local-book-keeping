@@ -16,8 +16,7 @@ class BookController {
         params.max = params?.max ?: 10
         List<Book> bookList = bookDaoService.list(params);
         [list: bookList,
-         count: bookList.getTotalCount(),
-         fieldProperties: ['id', 'title', 'author', 'isbn', 'status', 'dateCreated', 'lastUpdated']]
+         count: bookList.getTotalCount()]
     }
 
     @Secured('permitAll')
