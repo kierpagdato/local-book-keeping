@@ -2,7 +2,6 @@ package com.bookkeeping
 
 import com.bookkeeping.dao.UserDaoService
 import com.bookkeeping.security.User
-import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
@@ -10,8 +9,6 @@ import static org.springframework.http.HttpStatus.*
 class UserController {
 
     UserDaoService userDaoService
-
-    SpringSecurityService springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -29,55 +26,36 @@ class UserController {
         respond userDaoService.get(id)
     }
 
-    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-    def register() {
+    @Secured('ROLE_LIBRARIAN')
+    def create() {
         respond new User(params)
     }
 
-    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-    def saveUser(User user) {
-
-        if(!user.validate()) {
-            render(view: 'register', model: [user: user])
-            return
-        }
-
-        try {
-            userDaoService.saveUser(user)
-        } catch (ValidationException e) {
-            respond user.errors, view:'register'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User')])
-                redirect uri: '/login/auth'
-            }
-            '*' { respond user, [status: CREATED] }
-        }
-    }
-
+    @Secured('ROLE_LIBRARIAN')
     def save(User user) {
+
+        println "save ${user}"
         if (user == null) {
             notFound()
             return
         }
 
-        try {
-            userDaoService.save(user)
-        } catch (ValidationException e) {
-            respond user.errors, view:'register'
+        if(!user.validate()) {
+            render view: 'create', model: [user: user]
             return
         }
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
-            }
-            '*' { respond user, [status: CREATED] }
+        println "here"
+
+        try {
+            userDaoService.save(user)
+            userDaoService.setRoles(user, params.getList('roles'))
+        } catch (ValidationException e) {
+            respond user.errors, view:'create'
+            return
         }
+
+        redirect action:"index", params: [sort: "dateCreated", order: "desc"]
     }
 
     @Secured('ROLE_LIBRARIAN')
@@ -124,6 +102,35 @@ class UserController {
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
+        }
+    }
+
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    def register() {
+        respond new User(params)
+    }
+
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    def saveUser(User user) {
+
+        if(!user.validate()) {
+            render(view: 'register', model: [user: user])
+            return
+        }
+
+        try {
+            userDaoService.saveUser(user)
+        } catch (ValidationException e) {
+            respond user.errors, view:'register'
+            return
+        }
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User')])
+                redirect uri: '/login/auth'
+            }
+            '*' { respond user, [status: CREATED] }
         }
     }
 

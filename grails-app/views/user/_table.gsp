@@ -6,7 +6,7 @@
         <g:sortableColumn property="lastName" title="Last Name" />
         <g:sortableColumn property="username" title="Username" />
         <g:sortableColumn property="enabled" title="Enabled" />
-        <th>Role</th>
+        <th>Roles</th>
         <g:sortableColumn property="dateCreated" title="Date created" />
         <g:sortableColumn property="lastUpdated" title="Last updated" />
     </tr>

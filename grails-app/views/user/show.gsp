@@ -85,7 +85,7 @@
                                 <li>
                                     <span>
                                         <strong>
-                                            Role
+                                            Roles
                                         </strong>
                                     </span>
                                     <div>

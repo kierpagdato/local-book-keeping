@@ -11,7 +11,7 @@
         <p class="menu-label">Librarian</p>
         <ul class="menu-list">
             <li>
-                <g:link controller='user' action='index'>Create user</g:link>
+                <g:link controller='user' action='create'>Create user</g:link>
             </li>
             <li>
                 <g:link controller='user' action='index'>User masterlist</g:link>
