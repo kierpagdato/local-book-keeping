@@ -1,4 +1,4 @@
-package com.bookkeeping.models
+package com.bookkeeping.my_user
 
 import grails.plugin.springsecurity.userdetails.GrailsUser
 import org.springframework.security.core.GrantedAuthority

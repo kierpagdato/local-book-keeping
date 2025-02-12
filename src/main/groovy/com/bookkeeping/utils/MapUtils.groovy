@@ -3,7 +3,7 @@ package com.bookkeeping.utils
 class MapUtils {
 
     static String mapToHtmlAttr(Map map) {
-        def sb = ''
+        String sb = ''
 
         for (item in map) {
             if(item.value != null)

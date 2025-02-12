@@ -1,6 +1,6 @@
-package com.bookkeeping.services
+package com.bookkeeping.my_user
 
-import com.bookkeeping.models.MyUserDetails
+import com.bookkeeping.security.Role
 import com.bookkeeping.security.User
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.userdetails.GrailsUserDetailsService
@@ -14,8 +14,8 @@ class MyUserDetailsService implements GrailsUserDetailsService {
 
     static final List NO_ROLES = [new SimpleGrantedAuthority(SpringSecurityUtils.NO_ROLE)]
 
-    UserDetails loadUserByUsername(String username, boolean loadRoles)
-            throws UsernameNotFoundException {
+    @Override
+    UserDetails loadUserByUsername(String username, boolean loadRoles) throws UsernameNotFoundException {
         return loadUserByUsername(username)
     }
 
@@ -23,11 +23,13 @@ class MyUserDetailsService implements GrailsUserDetailsService {
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = User.findByUsername(username)
-        if (!user) throw new NoStackUsernameNotFoundException()
+        if (!user) {
+            throw new NoStackUsernameNotFoundException()
+        }
 
-        def roles = user.authorities
+        Set<Role> roles = user.authorities
 
-        def authorities = roles.collect {
+        List<SimpleGrantedAuthority> authorities = roles.collect {
             new SimpleGrantedAuthority(it.authority)
         }
 

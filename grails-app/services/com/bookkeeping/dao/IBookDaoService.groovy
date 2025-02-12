@@ -3,6 +3,7 @@ package com.bookkeeping.dao
 import com.bookkeeping.Book
 import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
+import grails.web.servlet.mvc.GrailsParameterMap
 
 
 interface IBookDaoService {
@@ -13,16 +14,15 @@ interface IBookDaoService {
 
     Book save(Book book)
 
-    void delete(id)
+    void delete(Serializable id)
 
 }
-
 
 @Transactional
 @Service(Book)
 abstract class BookDaoService implements IBookDaoService {
 
-    def list(params) {
+    List<Book> list(GrailsParameterMap params) {
         return Book.createCriteria().list(params) {
             if(params?.keyword?.trim()) {
                 ilike("title", "%" + params.keyword + "%")

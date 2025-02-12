@@ -3,7 +3,6 @@ package com.bookkeeping
 import com.bookkeeping.dao.UserDaoService
 import com.bookkeeping.dao.UserRoleDaoService
 import com.bookkeeping.security.User
-import com.bookkeeping.security.UserRole
 import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
