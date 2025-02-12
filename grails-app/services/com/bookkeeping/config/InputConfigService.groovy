@@ -3,6 +3,7 @@ package com.bookkeeping.config
 import grails.config.Config
 import grails.core.support.GrailsConfigurationAware
 
+//todo what is this for?
 class InputConfigService implements GrailsConfigurationAware {
 
     Set<String> textareaFields

@@ -16,7 +16,7 @@ class BookController {
         params.max = params?.max ?: 10
         List<Book> bookList = bookDaoService.list(params)
         [list: bookList,
-         count: bookList.getTotalCount()]
+         count: bookList.getTotalCount()] //todo never seen this. whats the sql
     }
 
     @Secured('permitAll')

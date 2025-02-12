@@ -106,7 +106,7 @@ class AccountController {
             return
         }
 
-        if (id != secUser.id) {
+        if (id != secUser.id) { //todo use roles
             badRequest()
             return
         }

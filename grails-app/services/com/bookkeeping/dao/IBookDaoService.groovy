@@ -22,7 +22,7 @@ interface IBookDaoService {
 @Service(Book)
 abstract class BookDaoService implements IBookDaoService {
 
-    def list(params) {
+    def list(params) { //todo method signatures
         return Book.createCriteria().list(params) {
             if(params?.keyword?.trim()) {
                 ilike("title", "%" + params.keyword + "%")

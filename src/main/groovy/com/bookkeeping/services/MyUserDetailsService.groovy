@@ -14,6 +14,7 @@ class MyUserDetailsService implements GrailsUserDetailsService {
 
     static final List NO_ROLES = [new SimpleGrantedAuthority(SpringSecurityUtils.NO_ROLE)]
 
+    //todo production could always sets explicit access rights: public UserDetails loadUser...
     UserDetails loadUserByUsername(String username, boolean loadRoles)
             throws UsernameNotFoundException {
         return loadUserByUsername(username)
@@ -23,8 +24,10 @@ class MyUserDetailsService implements GrailsUserDetailsService {
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = User.findByUsername(username)
+        //todo production code never uses the single line if. Always be curly
         if (!user) throw new NoStackUsernameNotFoundException()
 
+        //todo production code makes effort to set type at declaration
         def roles = user.authorities
 
         def authorities = roles.collect {
