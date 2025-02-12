@@ -1,5 +1,5 @@
 databaseChangeLog = {
-
+//todo nice! what was the command?
     changeSet(author: "kierpagdato (generated)", id: "1739336681435-1") {
         createTable(tableName: "book") {
             column(autoIncrement: "true", name: "id", type: "BIGINT") {

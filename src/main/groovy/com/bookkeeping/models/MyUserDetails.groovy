@@ -2,7 +2,7 @@ package com.bookkeeping.models
 
 import grails.plugin.springsecurity.userdetails.GrailsUser
 import org.springframework.security.core.GrantedAuthority
-
+//todo the packaging should be by domain not kind: com.booking.my_user.MyUserDetails|MyUserDetailsService
 class MyUserDetails extends GrailsUser {
 
     final String email
