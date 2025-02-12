@@ -1,5 +1,6 @@
 package com.bookkeeping
 
+import com.bookkeeping.account.AccountController
 import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 

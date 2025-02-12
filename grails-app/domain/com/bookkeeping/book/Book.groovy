@@ -1,6 +1,9 @@
-package com.bookkeeping
+package com.bookkeeping.book
 
+import com.bookkeeping.borrow.Borrow
 import groovy.transform.ToString
+
+import java.time.LocalDateTime
 
 @ToString(includeNames=true, includePackage=false)
 class Book {
@@ -16,8 +19,8 @@ class Book {
 
     String description
 
-    Date dateCreated
-    Date lastUpdated
+    LocalDateTime dateCreated
+    LocalDateTime lastUpdated
 
     int quantity
 
@@ -39,21 +42,18 @@ class Book {
         quantity bindable: true, minSize: 1
     }
 
-//    @Override
-//    String toString() {
-//        "${id} : ${title} : ${author} : ${isbn} : ${status} : ${description}"
-//    }
-
     enum Status {
-        COMING("Coming"),
-        SHELVED("Shelved"),
-        OUT("Checked out"),
-        ARCHIVED("Archived")
+        COMING("Coming", "is-info"),
+        SHELVED("Shelved", "is-link"),
+        OUT("Checked out", "is-warning"),
+        ARCHIVED("Archived", "is-danger")
 
         String text
+        String color
 
-        Status(String text) {
-            this.text = text;
+        Status(String text, String color) {
+            this.text = text
+            this.color = color
         }
     }
 }

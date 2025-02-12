@@ -4,6 +4,8 @@ import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import grails.compiler.GrailsCompileStatic
 
+import java.time.LocalDateTime
+
 @GrailsCompileStatic
 @EqualsAndHashCode(includes='authority')
 @ToString(includes='authority', includeNames=true, includePackage=false)
@@ -14,8 +16,8 @@ class Role implements Serializable {
     String authority
     String text
 
-    Date dateCreated
-    Date lastUpdated
+    LocalDateTime dateCreated
+    LocalDateTime lastUpdated
 
     static constraints = {
         authority nullable: false, blank: false, unique: true

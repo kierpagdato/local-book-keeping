@@ -1,10 +1,10 @@
 package com.bookkeeping
 
-import com.bookkeeping.book.Book
-import grails.testing.gorm.DomainUnitTest
+import com.bookkeeping.borrow.BorrowDaoSerivce
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class BookSpec extends Specification implements DomainUnitTest<Book> {
+class BorrowDaoServiceSpec extends Specification implements ServiceUnitTest<BorrowDaoSerivce>{
 
     def setup() {
     }

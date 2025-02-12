@@ -1,9 +1,9 @@
-package com.bookkeeping
+package com.bookkeeping.borrow
 
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class BorrowDaoSerivceServiceSpec extends Specification implements ServiceUnitTest<BorrowDaoSerivceService>{
+class BorrowServiceSpec extends Specification implements ServiceUnitTest<BorrowService>{
 
     def setup() {
     }

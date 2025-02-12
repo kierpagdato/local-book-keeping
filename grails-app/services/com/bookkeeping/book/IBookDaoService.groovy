@@ -1,6 +1,6 @@
-package com.bookkeeping.dao
+package com.bookkeeping.book
 
-import com.bookkeeping.Book
+
 import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
 import grails.web.servlet.mvc.GrailsParameterMap

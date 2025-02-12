@@ -28,7 +28,7 @@
                 ${bean.isbn}
             </td>
             <td>
-                ${bean.status.text}
+                <span class="tag ${bean.status.color}">${bean.status.text}</span>
             </td>
             <td>
                 ${bean.dateCreated}

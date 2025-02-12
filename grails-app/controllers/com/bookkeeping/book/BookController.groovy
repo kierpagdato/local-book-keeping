@@ -1,6 +1,6 @@
-package com.bookkeeping
+package com.bookkeeping.book
 
-import com.bookkeeping.dao.BookDaoService
+
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.NOT_FOUND

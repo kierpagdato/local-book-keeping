@@ -19,7 +19,19 @@
 
                 <br>
 
+                <g:if test='${flash.message}'>
+                    <div class="notification is-light pt-3 pb-3">
+                        <span>
+                            ${flash.message}
+                        </span>
+                    </div>
+                    <br>
+                </g:if>
+
                 <div class="tags">
+                    <span class="tag ${book.status.color}">
+                        ${this.book.status.text}
+                    </span>
                     <span class="tag is-light">
                         <strong>Create date:</strong> ${this.book.dateCreated}
                     </span>
@@ -27,6 +39,8 @@
                         <strong>Last modified date:</strong> ${this.book.lastUpdated}
                     </span>
                 </div>
+
+                <br>
 
                 <div class="card">
                   <header class="card-header">
@@ -62,14 +76,6 @@
                             <li>
                                 <span>
                                     <strong>
-                                        Status
-                                    </strong>
-                                </span>
-                                <div>${book.status?.text}</div>
-                            </li>
-                            <li>
-                                <span>
-                                    <strong>
                                         Description
                                     </strong>
                                 </span>
@@ -78,14 +84,28 @@
                         </ol>
                     </div>
                   </div>
-                    <sec:ifAnyGranted roles="ROLE_LIBRARIAN">
-                        <g:form resource="${this.book}" method="DELETE">
-                          <footer class="card-footer">
+
+                    <sec:ifLoggedIn>
+                        <footer class="card-footer">
+                            <sec:ifAnyGranted roles="ROLE_LIBRARIAN">
                                 <g:link class="card-footer-item" action="edit" resource="${this.book}">Edit</g:link>
-                                <g:submitButton name="delete" class="button is-text card-footer-item" value="Delete" />
-                          </footer>
-                        </g:form>
-                    </sec:ifAnyGranted>
+                            </sec:ifAnyGranted>
+
+                            <sec:ifAnyGranted roles="ROLE_LIBRARIAN, ROLE_USER">
+                                <g:if test="${this.book.status == com.bookkeeping.book.Book.Status.SHELVED}">
+                                    <g:form controller="borrow" action="selfCheckout" method="POST" id="${this.book.id}" class="card-footer-item">
+                                        <g:submitButton name="borrow" class="button is-text" value="Borrow" />
+                                    </g:form>
+                                </g:if>
+                            </sec:ifAnyGranted>
+
+                            <sec:ifAnyGranted roles="ROLE_LIBRARIAN">
+                                <g:form resource="${this.book}" method="DELETE" class="card-footer-item has-background-danger">
+                                    <g:submitButton name="delete" class="button is-danger" value="Delete" />
+                                </g:form>
+                            </sec:ifAnyGranted>
+                        </footer>
+                    </sec:ifLoggedIn>
                 </div>
             </div>
         </div>

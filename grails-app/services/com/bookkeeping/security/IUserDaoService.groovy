@@ -1,8 +1,6 @@
-package com.bookkeeping.dao
+package com.bookkeeping.security
 
-import com.bookkeeping.security.Role
-import com.bookkeeping.security.User
-import com.bookkeeping.security.UserRole
+
 import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
 

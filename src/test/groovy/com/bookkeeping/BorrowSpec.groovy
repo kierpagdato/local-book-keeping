@@ -1,5 +1,6 @@
 package com.bookkeeping
 
+import com.bookkeeping.borrow.Borrow
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 

@@ -1,6 +1,6 @@
 package com.bookkeeping
 
-import com.bookkeeping.dao.IBookDaoService
+import com.bookkeeping.book.IBookDaoService
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 

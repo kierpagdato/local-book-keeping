@@ -1,9 +1,11 @@
 package com.bookkeeping.security
 
-import com.bookkeeping.Borrow
+import com.bookkeeping.borrow.Borrow
 import grails.compiler.GrailsCompileStatic
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
+
+import java.time.LocalDateTime
 
 @GrailsCompileStatic
 @EqualsAndHashCode(includes='username')
@@ -24,8 +26,8 @@ class User implements Serializable {
     boolean accountLocked
     boolean passwordExpired
 
-    Date dateCreated
-    Date lastUpdated
+    LocalDateTime dateCreated
+    LocalDateTime lastUpdated
 
     static hasMany = [borrow: Borrow, processedBorrow: Borrow]
 

@@ -1,4 +1,4 @@
-<%@ page import="com.bookkeeping.Book" %>
+<%@ page import="com.bookkeeping.book.Book" %>
 <div class="field">
     <label class="label ${hasErrors(field: 'title', bean: book, 'has-text-danger')}">Title</label>
     <div class="control ${hasErrors(field: 'title', bean: book, 'has-icons-right')}">

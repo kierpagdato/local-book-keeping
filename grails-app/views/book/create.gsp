@@ -1,4 +1,4 @@
-<%@ page import="com.bookkeeping.Book" %>
+<%@ page import="com.bookkeeping.book.Book" %>
 <!DOCTYPE html>
 <html>
     <head>
