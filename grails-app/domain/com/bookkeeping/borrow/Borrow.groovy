@@ -7,6 +7,7 @@ import java.time.LocalDateTime
 
 class Borrow {
 
+    String transactionId
 
     LocalDateTime dateBorrowed
     LocalDateTime dateReturned
@@ -27,6 +28,7 @@ class Borrow {
     }
 
     static constraints = {
+        transactionId nullable: false
         dateBorrowed nullable: false
         dateReturned nullable: true
         book nullable: false

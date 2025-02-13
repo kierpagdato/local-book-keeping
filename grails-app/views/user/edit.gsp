@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <g:set var="page" value="userList" scope="request"/>
         <meta name="layout" content="main" />
         <title>Update user</title>
     </head>
@@ -9,6 +10,10 @@
         <div class="columns is-mobile is-centered">
 
             <div class="column is-half">
+
+                <g:render template="breadcrumbs" model="[active:'show']"/>
+
+                <br>
 
                 <div class="tags">
                     <span class="tag is-light">

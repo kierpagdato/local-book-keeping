@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <g:set var="page" value="userCreate" scope="request"/>
         <meta name="layout" content="main" />
         <title>Create user</title>
     </head>
@@ -10,6 +11,10 @@
         <div class="columns is-mobile is-centered">
 
             <div class="column is-half">
+
+                <g:render template="breadcrumbs" model="[active:'add']"/>
+
+                <br>
 
 
                 <g:form resource="${this.user}" method="POST">

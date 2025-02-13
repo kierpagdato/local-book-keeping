@@ -20,4 +20,8 @@ interface IBorrowDaoService {
 @Service(Borrow)
 abstract class BorrowDaoService implements IBorrowDaoService {
 
+    List<Serializable> saveAll(Collection<Borrow> borrowList) {
+        Borrow.saveAll(borrowList)
+    }
+
 }

@@ -13,15 +13,21 @@ class BorrowService {
     BookDaoService bookDaoService
     BorrowDaoService borrowDaoService
 
-    Borrow selfService(Book book, User user) {
+    void selfService(List<Book> bookList, User user, boolean isSelf) {
 
-        Borrow borrow = new Borrow(book: book, borrower: user, processor: user, dateBorrowed: LocalDateTime.now(),
-                status: Borrow.Status.OUT, type: Borrow.Type.SELF)
-        borrowDaoService.save(borrow)
+        Set<Borrow> borrowList = new HashSet<>()
 
-        book.status = Book.Status.OUT
-        bookDaoService.save(book)
+        String transactionId = UUID.randomUUID().toString()
 
-        return borrow
+        for(Book book : bookList) {
+            borrowList.add(new Borrow(transactionId: transactionId, book: book, borrower: user, processor: user, dateBorrowed: LocalDateTime.now(),
+                    status: Borrow.Status.OUT, type: isSelf? Borrow.Type.SELF : Borrow.Type.LIBRARY))
+            book.status = Book.Status.OUT
+        }
+
+        borrowDaoService.saveAll(borrowList)
+
+        bookDaoService.saveAll(bookList)
+
     }
 }

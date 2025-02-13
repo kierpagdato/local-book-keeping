@@ -1,14 +1,7 @@
-<%@ page import="com.bookkeeping.utils.SessionUtils;com.bookkeeping.book.Book" %>
-<g:set var="borrowBasket" value="${SessionUtils.getBorrowBasket(session)}"/>
-
+<%@ page import="com.bookkeeping.book.Book" %>
 <table class="table is-hoverable is-fullwidth">
     <thead>
         <tr>
-            <sec:ifLoggedIn>
-                <th>
-                    <g:checkBox name="headerSelected"/>
-                </th>
-            </sec:ifLoggedIn>
             <g:sortableColumn property="id" title="ID" />
             <g:sortableColumn property="title" title="Title" />
             <g:sortableColumn property="author" title="Author" />
@@ -21,14 +14,6 @@
     <tbody>
         <g:each in="${list}" var="bean">
             <tr>
-                <sec:ifLoggedIn>
-                    <td>
-                        <g:checkBox name="selected" class="${bean.status != Book.Status.SHELVED?: 'checkbox-select'}" value="${bean.id}"
-                                    checked="${borrowBasket?.bookIds?.contains(bean.id.toString())?: 'false'}"
-                                    disabled="${bean.status != Book.Status.SHELVED}"
-                                    form="borrowBasketForm"/>
-                    </td>
-                </sec:ifLoggedIn>
                 <td>
                     <g:link method="GET" resource="${bean}">
                         ${bean.id}

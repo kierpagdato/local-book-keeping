@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <g:set var="page" value="books" scope="request"/>
         <meta name="layout" content="main" />
         <title>Update book</title>
     </head>

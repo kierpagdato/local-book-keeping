@@ -1,8 +1,10 @@
 package com.bookkeeping.account
 
+import com.bookkeeping.borrow.BorrowBasket
 import com.bookkeeping.security.UserDaoService
 import com.bookkeeping.security.UserRoleDaoService
 import com.bookkeeping.security.User
+import com.bookkeeping.utils.SessionUtils
 import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
@@ -50,6 +52,15 @@ class AccountController {
             }
             '*' { respond user, [status: CREATED] }
         }
+    }
+
+    @Secured(['IS_AUTHENTICATED_FULLY'])
+    def loginSuccess() {
+
+        //Will create new object if borrow basket is null
+        SessionUtils.getBorrowBasket(session)
+
+        redirect uri: "/"
     }
 
     @Secured(['IS_AUTHENTICATED_FULLY'])

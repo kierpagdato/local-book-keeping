@@ -1,6 +1,10 @@
+<%@ page import="com.bookkeeping.borrow.BorrowBasket" %>
 <!doctype html>
 <html lang="en" class="no-js">
     <head>
+
+        <g:set var="borrowBasket" value="${session.getAttribute(BorrowBasket.SESSION_KEY)}"/>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <title>
@@ -13,6 +17,9 @@
         <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-6.5.2-web/css/all.min.css">
 
         <g:layoutHead/>
+
+        <asset:javascript src="application.js"/>
+
     </head>
 
     <body>
@@ -37,7 +44,7 @@
 
             </div>
             <div class="navbar-search">
-                <g:form method="GET" controller="book" action="index">
+                <g:form method="GET" controller="book" action="index" name="bookSearch">
                     <div class="navbar-item">
                         <div class="field has-addons is-expanded">
                           <p class="control">
@@ -55,7 +62,19 @@
 
             <div class="navbar-end">
                 <sec:ifLoggedIn>
-                    <g:link class="navbar-item" controller='account' action='edit'>
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <g:link class="button ${page == 'borrowBasket'? 'is-link' : ''}" controller='borrow' action='basket'>
+                                <span class="icon">
+                                    <i class="fa-solid fa-basket-shopping"></i>
+                                </span>
+                                <g:if test="${borrowBasket && borrowBasket?.bookIds?.size() > 0}">
+                                    <code>${borrowBasket.bookIds.size()}</code>
+                                </g:if>
+                            </g:link>
+                        </div>
+                    </div>
+                    <g:link class="navbar-item ${page == 'myAccount'? 'is-active has-text-white' : ''}" controller='account' action='edit'>
                             Welcome Back <sec:loggedInUserInfo field='firstName'/>!
                     </g:link>
                     <div class="navbar-item">
@@ -107,8 +126,6 @@
         <div id="spinner" class="spinner" style="display:none;">
             <g:message code="spinner.alt" default="Loading&hellip;"/>
         </div>
-
-        <asset:javascript src="application.js"/>
 
     </body>
 </html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <g:set var="page" value="myAccount" scope="request"/>
         <meta name="layout" content="main" />
         <title>My Details</title>
     </head>

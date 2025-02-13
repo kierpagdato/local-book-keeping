@@ -95,6 +95,6 @@
 <div class="field">
     <label class="label ${hasErrors(field: 'enabled', bean: user, 'has-text-danger')}">Enabled</label>
     <div class="control ${hasErrors(field: 'enabled', bean: user, 'has-icons-right')}">
-        <g:checkBox type="checkbox" name="enabled" id="enabled" checked="${user.enabled}"/>
+        <g:checkBox name="enabled" id="enabled" checked="${user.enabled}"/>
     </div>
 </div>

@@ -1,6 +1,8 @@
+<%@ page import="com.bookkeeping.book.Book" %>
 <!DOCTYPE html>
 <html>
     <head>
+        <g:set var="page" value="books" scope="request"/>
         <meta name="layout" content="main" />
         <title>Book info</title>
         <style>
@@ -92,9 +94,10 @@
                             </sec:ifAnyGranted>
 
                             <sec:ifAnyGranted roles="ROLE_LIBRARIAN, ROLE_USER">
-                                <g:if test="${this.book.status == com.bookkeeping.book.Book.Status.SHELVED}">
-                                    <g:form controller="borrow" action="selfCheckout" method="POST" id="${this.book.id}" class="card-footer-item">
-                                        <g:submitButton name="borrow" class="button is-text" value="Borrow" />
+                                <g:if test="${this.book.status == Book.Status.SHELVED}">
+                                    <g:form controller="borrow" action="addToBasket" method="POST" class="card-footer-item">
+                                        <g:hiddenField name="selected" value="${this.book.id}"/>
+                                        <g:submitButton name="borrow" class="button is-text" value="Add to basket" />
                                     </g:form>
                                 </g:if>
                             </sec:ifAnyGranted>
