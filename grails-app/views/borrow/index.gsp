@@ -3,13 +3,17 @@
 <head>
     <g:set var="page" value="borrow" scope="request"/>
     <meta name="layout" content="main" />
-    <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-    <title><g:message code="default.list.label" args="[entityName]" /></title>
+    <title>Borrow list</title>
 </head>
 <body>
 <div class="columns is-mobile is-centered">
 
     <div class="column is-full">
+
+
+        <g:render template="breadcrumbs" model="[active:'list']"/>
+
+        <br>
 
         <g:if test="${flash.message}">
             <div class="notification is-light pt-3 pb-3">

@@ -27,6 +27,10 @@ abstract class BorrowDaoService implements IBorrowDaoService {
         Borrow.saveAll(borrowList)
     }
 
+    List<Borrow> listByTransactionId(String transactionId) {
+        return Borrow.findAllByTransactionId(transactionId)
+    }
+
     List<Borrow> listDistinct(GrailsParameterMap params) {
         return Borrow.createCriteria().list {
             resultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP)
@@ -34,8 +38,6 @@ abstract class BorrowDaoService implements IBorrowDaoService {
                 groupProperty 'transactionId'
                 min ('id', 'id')
                 min ('transactionId', 'transactionId')
-                min ('dateCreated','dateCreated')
-                min ('lastUpdated','lastUpdated')
                 min ('dateBorrowed','dateBorrowed')
                 min ('dateReturned','dateReturned')
                 min ('type','type')

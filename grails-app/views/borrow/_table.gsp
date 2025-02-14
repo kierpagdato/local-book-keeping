@@ -3,18 +3,17 @@
     <thead>
         <tr>
             <g:sortableColumn property="transactionId" title="Transaction ID" />
-            <g:sortableColumn property="dateBorrowed" title="Borrowed Date" />
-            <g:sortableColumn property="dateReturned" title="Return Date" />
+            <g:sortableColumn property="dateBorrowed" title="Borrowed date" />
+            <g:sortableColumn property="dateReturned" title="Return date" />
             <g:sortableColumn property="status" title="Status" />
             <g:sortableColumn property="type" title="Type" />
-            <g:sortableColumn property="dateCreated" title="Date created" />
         </tr>
     </thead>
     <tbody>
         <g:each in="${list}" var="bean">
             <tr>
                 <td>
-                    <g:link method="GET" resource="${bean}">
+                    <g:link method="GET" action="receipt" id="${bean.transactionId}">
                         ${bean.transactionId}
                     </g:link>
                 </td>
@@ -30,9 +29,6 @@
                 </td>
                 <td>
                     ${bean.type.text}
-                </td>
-                <td>
-                    ${bean.dateCreated}
                 </td>
             </tr>
         </g:each>

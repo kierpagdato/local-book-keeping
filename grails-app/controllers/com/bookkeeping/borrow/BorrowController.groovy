@@ -39,6 +39,11 @@ class BorrowController {
         count: count]
     }
 
+    def receipt(String id) {
+        List<Borrow> borrowList = borrowDaoService.listByTransactionId(id)
+        [list: borrowList]
+    }
+
     def basket() {
 
         MyUserDetails myUserDetails = (MyUserDetails) springSecurityService.principal
