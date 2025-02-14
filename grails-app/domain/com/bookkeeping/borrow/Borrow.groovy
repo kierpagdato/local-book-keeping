@@ -39,13 +39,15 @@ class Borrow {
     }
 
     enum Status {
-        OUT("Out"),
-        RETURNED("Returned")
+        OUT("Out", "is-warning"),
+        RETURNED("Returned", "is-success")
 
         String text
+        String color
 
-        Status(String text) {
+        Status(String text, String color) {
             this.text = text
+            this.color = color
         }
     }
 

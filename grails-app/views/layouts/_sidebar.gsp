@@ -4,7 +4,9 @@
         <li>
             <g:link controller='book' action='index' class="${page == 'books'? 'is-active' : ''}">Books</g:link>
         </li>
-        <li><a class="${page == 'borrow'? 'is-active' : ''}">Borrow</a></li>
+        <li>
+            <g:link controller='borrow' action='index' class="${page == 'borrow'? 'is-active' : ''}">Borrow</g:link>
+        </li>
     </ul>
 
     <sec:ifAnyGranted roles="ROLE_LIBRARIAN">

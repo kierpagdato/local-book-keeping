@@ -20,11 +20,24 @@ class BorrowController {
 
     UserDaoService userDaoService
     BookDaoService bookDaoService
+    BorrowDaoService borrowDaoService
     BorrowService borrowService
 
     SpringSecurityService springSecurityService
 
     static allowedMethods = [selfCheckout: "POST", addToBasket: "POST", update: "PUT", delete: "DELETE"]
+
+    def index() {
+
+        params.max = params?.max?: 5
+        params.offset = params?.offset?: 0
+
+        List<Borrow> borrowList = borrowDaoService.listDistinct(params)
+        Long count = borrowDaoService.countDistinct()
+
+        [list: borrowList,
+        count: count]
+    }
 
     def basket() {
 
@@ -69,7 +82,6 @@ class BorrowController {
         if(!isCurrentId) {
             selectedUser = userDaoService.get(params.user)
         }
-
 
         List<Book> bookList = bookDaoService.listByIdsAndStatus(basket.bookIds, Book.Status.SHELVED)
 
