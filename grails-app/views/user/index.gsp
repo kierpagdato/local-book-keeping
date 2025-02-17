@@ -7,23 +7,22 @@
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
+        <g:render template="breadcrumbs" model="[active:'list']"/>
+
+        <br>
+
+        <g:if test="${flash.message}">
+            <div class="notification is-light pt-3 pb-3">
+                <span>
+                    ${flash.message}
+                </span>
+            </div>
+            <br>
+        </g:if>
+
         <div class="columns is-mobile is-centered">
 
-            <div class="column is-four-fifths">
-
-
-                <g:render template="breadcrumbs" model="[active:'list']"/>
-
-                <br>
-
-                <g:if test="${flash.message}">
-                    <div class="notification is-light pt-3 pb-3">
-                        <span>
-                            ${flash.message}
-                        </span>
-                    </div>
-                    <br>
-                </g:if>
+            <div class="column is-full">
 
                 <g:render template="table"/>
 

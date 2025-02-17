@@ -32,9 +32,17 @@ class BorrowController {
         params.max = params?.max?: 5
         params.offset = params?.offset?: 0
 
-        List<Borrow> borrowList = borrowDaoService.listDistinct(params)
-        Long count = borrowDaoService.countDistinct()
+        MyUserDetails myUserDetails = (MyUserDetails) springSecurityService.principal
 
+        List<Borrow> borrowList = []
+        Long count = 0
+        if(myUserDetails.hasAuthority("ROLE_LIBRARIAN")) {
+            borrowList = borrowDaoService.listDistinct(params, null)
+            count = borrowDaoService.countDistinct(null)
+        } else {
+            borrowList = borrowDaoService.listDistinct(params, myUserDetails.id)
+            count = borrowDaoService.countDistinct(myUserDetails.id)
+        }
         [list: borrowList,
         count: count]
     }
@@ -58,6 +66,24 @@ class BorrowController {
         List<Book> bookList = bookDaoService.listByIds(basket.bookIds)
         [list: bookList,
         userList: userList]
+    }
+
+    def addToBasket() {
+
+        boolean isAdded = false
+
+        if(params?.selected) {
+            SessionUtils.getBorrowBasket(session)?.addToBasket(params.selected)
+            isAdded = true
+        }
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = isAdded? 'Books added to basket.' : ''
+                redirect controller: 'book', action: 'index', params: params?.selected
+            }
+            '*' { respond user, [status: CREATED] }
+        }
     }
 
     def checkOut() {
@@ -90,36 +116,37 @@ class BorrowController {
 
         List<Book> bookList = bookDaoService.listByIdsAndStatus(basket.bookIds, Book.Status.SHELVED)
 
+        String transactionId
         if(CollectionUtils.isNotEmpty(bookList)) {
-            borrowService.selfService(bookList, selectedUser, isCurrentId)
+            transactionId = borrowService.selfService(bookList, selectedUser, isCurrentId)
             basket.bookIds.clear()
         }
-
 
         request.withFormat {
             form multipartForm {
                 flash.message = 'Check out successful.'
-                redirect controller: 'book', action: 'index'
+                if(transactionId) {
+                    redirect controller: 'borrow', action: 'receipt', id: transactionId
+                } else {
+                    redirect controller: 'book', action: 'index'
+                }
             }
             '*' { respond user, [status: CREATED] }
         }
     }
 
-    def addToBasket() {
+    @Secured('ROLE_LIBRARIAN')
+    def returnBorrow(String id) {
 
-        boolean isAdded = false
-
-        if(params?.selected) {
-            SessionUtils.getBorrowBasket(session)?.addToBasket(params.selected)
-            isAdded = true
-        }
+        User selectedUser = springSecurityService.currentUser as User
+        borrowService.returnBorrow(id, selectedUser)
 
         request.withFormat {
             form multipartForm {
-                flash.message = isAdded? 'Books added to basket.' : ''
-                redirect controller: 'book', action: 'index', params: params?.selected
+                flash.message = 'Returned.'
+                redirect controller: 'book', action: 'index'
             }
-            '*' { respond user, [status: CREATED] }
+            '*' { respond user, [status: OK] }
         }
     }
 

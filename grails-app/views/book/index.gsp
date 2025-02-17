@@ -10,7 +10,7 @@
 
         <div class="columns is-mobile is-centered">
 
-            <div class="column is-four-fifths">
+            <div class="column is-full">
 
                 <g:render template="breadcrumbs" model="[active:'list']"/>
 

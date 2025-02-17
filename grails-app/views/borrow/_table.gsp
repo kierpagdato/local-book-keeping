@@ -3,6 +3,9 @@
     <thead>
         <tr>
             <g:sortableColumn property="transactionId" title="Transaction ID" />
+            <sec:ifAnyGranted roles="ROLE_LIBRARIAN">
+                <td>Borrower</td>
+            </sec:ifAnyGranted>
             <g:sortableColumn property="dateBorrowed" title="Borrowed date" />
             <g:sortableColumn property="dateReturned" title="Return date" />
             <g:sortableColumn property="status" title="Status" />
@@ -17,6 +20,11 @@
                         ${bean.transactionId}
                     </g:link>
                 </td>
+                <sec:ifAnyGranted roles="ROLE_LIBRARIAN">
+                    <td>
+                        ${bean.borrower.firstName + ' ' + bean.borrower.lastName}
+                    </td>
+                </sec:ifAnyGranted>
                 <td>
                     ${bean.dateBorrowed}
                 </td>

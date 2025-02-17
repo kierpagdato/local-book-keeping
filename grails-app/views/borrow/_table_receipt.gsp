@@ -9,7 +9,10 @@
         <g:each in="${list}" var="bean">
             <tr>
                 <td>
-                    ${bean.book.title}
+
+                    <g:link method="GET" resource="${bean.book}">
+                        ${bean.book.title}
+                    </g:link>
                 </td>
             </tr>
         </g:each>

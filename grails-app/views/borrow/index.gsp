@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <g:set var="page" value="borrow" scope="request"/>
-    <meta name="layout" content="main" />
-    <title>Borrow list</title>
-</head>
-<body>
-<div class="columns is-mobile is-centered">
-
-    <div class="column is-full">
-
+    <head>
+        <g:set var="page" value="borrow" scope="request"/>
+        <meta name="layout" content="main" />
+        <title>Borrow list</title>
+    </head>
+    <body>
 
         <g:render template="breadcrumbs" model="[active:'list']"/>
 
@@ -24,14 +20,18 @@
             <br>
         </g:if>
 
-        <g:render template="table"/>
+        <div class="columns is-mobile is-centered">
 
-        <br>
+            <div class="column is-full">
 
-        <p>Query result: ${count}</p>
-        <bl:paginate controller="borrow" action="index" total="${count}" max="5" params="${params}"/>
-    </div>
-</div>
+                <g:render template="table"/>
 
-</body>
+                <br>
+
+                <p>Query result: ${count}</p>
+                <bl:paginate controller="borrow" action="index" total="${count}" max="5" params="${params}"/>
+            </div>
+        </div>
+
+    </body>
 </html>

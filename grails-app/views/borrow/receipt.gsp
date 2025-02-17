@@ -12,7 +12,6 @@
     </head>
     <body>
 
-
         <g:render template="breadcrumbs" model="[active:'receipt']"/>
 
         <br>
@@ -28,9 +27,9 @@
 
         <div class="columns is-mobile is-centered">
 
-            <div class="column is-8">
+            <div class="column is-6">
 
-                <g:form controller="borrow" action="return" method="POST">
+                <g:form controller="borrow" action="returnBorrow" id="${list[0].transactionId}" method="POST">
 
                     <div class="card">
                         <header class="card-header">
@@ -87,16 +86,19 @@
 
                             </div>
                         </div>
-                        <footer class="card-footer">
-                            <g:submitButton name="return" class="button is-text card-footer-item" value="Return" />
-                        </footer>
+
+                        <sec:ifAnyGranted roles="ROLE_LIBRARIAN">
+                            <footer class="card-footer">
+                                <g:submitButton name="return" class="button is-text card-footer-item" value="Process return" />
+                            </footer>
+                        </sec:ifAnyGranted>
                     </div>
 
                 </g:form>
 
             </div>
 
-            <div class="column is-4">
+            <div class="column is-6">
 
                 <g:render template="table_receipt"/>
 

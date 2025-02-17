@@ -7,18 +7,19 @@
         </head>
 
         <body>
+
+            <g:if test='${flash.message}'>
+                <div class="notification is-light pt-3 pb-3">
+                    <span>
+                        ${flash.message}
+                    </span>
+                </div>
+                <br>
+            </g:if>
+
             <div class="columns is-mobile is-centered">
 
                 <div class="column is-half">
-
-                    <g:if test='${flash.message}'>
-                        <div class="notification is-light pt-3 pb-3">
-                            <span>
-                                ${flash.message}
-                            </span>
-                        </div>
-                        <br>
-                    </g:if>
 
                     <form action="${postUrl ?: '/login/authenticate'}" method="POST">
 
