@@ -22,7 +22,7 @@
 
             <div class="column is-3">
 
-                <g:form controller="borrow" action="checkOut" method="POST">
+                <g:form controller="borrow" method="POST">
 
                     <div class="card">
                         <header class="card-header">
@@ -49,7 +49,8 @@
                             </div>
                         </div>
                         <footer class="card-footer">
-                            <g:submitButton name="proceed" class="button is-text card-footer-item" value="Proceed" />
+                            <g:actionSubmit action="checkOut" name="proceed" class="button is-text card-footer-item" value="Proceed" />
+                            <g:actionSubmit action="clearBasket" name="proceed" class="button is-warning card-footer-item" value="Clear basket" />
                         </footer>
                     </div>
 

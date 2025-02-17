@@ -3,6 +3,7 @@ package com.bookkeeping.borrow
 
 import com.bookkeeping.book.Book
 import com.bookkeeping.book.BookDaoService
+import com.bookkeeping.config.UserConfigService
 import com.bookkeeping.my_user.MyUserDetails
 import com.bookkeeping.security.User
 import com.bookkeeping.security.UserDaoService
@@ -22,6 +23,7 @@ class BorrowController {
     BookDaoService bookDaoService
     BorrowDaoService borrowDaoService
     BorrowService borrowService
+    UserConfigService userConfigService
 
     SpringSecurityService springSecurityService
 
@@ -114,6 +116,13 @@ class BorrowController {
             selectedUser = userDaoService.get(params.user)
         }
 
+        //check available basket
+        int userBorrowCount = borrowDaoService.countUserBorrow(selectedUser.id)
+        if(userBorrowCount + basket.bookIds.size() > userConfigService.userBorrowLimit) {
+            badRequestUserLimit()
+            return
+        }
+
         List<Book> bookList = bookDaoService.listByIdsAndStatus(basket.bookIds, Book.Status.SHELVED)
 
         String transactionId
@@ -135,6 +144,21 @@ class BorrowController {
         }
     }
 
+    def clearBasket() {
+
+        BorrowBasket basket = SessionUtils.getBorrowBasket(session)
+
+        basket.bookIds.clear()
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = 'Basket cleared.'
+                redirect controller: 'book', action: 'index'
+            }
+            '*' { respond user, [status: CREATED] }
+        }
+    }
+
     @Secured('ROLE_LIBRARIAN')
     def returnBorrow(String id) {
 
@@ -147,6 +171,16 @@ class BorrowController {
                 redirect controller: 'book', action: 'index'
             }
             '*' { respond user, [status: OK] }
+        }
+    }
+
+    protected void badRequestUserLimit() {
+        request.withFormat {
+            form multipartForm {
+                flash.message = 'Borrow limit exceeded. '
+                redirect controller: 'borrow', action: "index", method: "GET"
+            }
+            '*'{ render status: BAD_REQUEST }
         }
     }
 

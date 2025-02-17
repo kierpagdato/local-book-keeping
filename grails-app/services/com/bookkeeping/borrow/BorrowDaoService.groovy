@@ -69,6 +69,13 @@ abstract class BorrowDaoService implements IBorrowDaoService {
         }
     }
 
+    int countUserBorrow(Long userId) {
+        return Borrow.where {
+            status == Borrow.Status.OUT
+            borrower.id == userId
+        }.count()
+    }
+
     protected Closure findUserReceiptsClosure() {
         return { delegate, Long userId ->
             delegate.with {
