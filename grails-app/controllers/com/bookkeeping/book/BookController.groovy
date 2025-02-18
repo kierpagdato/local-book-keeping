@@ -13,10 +13,8 @@ class BookController {
 
     @Secured('permitAll')
     def index() {
-        println "book index start " + System.currentTimeMillis()
         params.max = params?.max ?: 10
         List<Book> bookList = bookDaoService.list(params)
-        println "book index end " + System.currentTimeMillis()
 
         [list: bookList,
          count: bookList.getTotalCount()]
