@@ -25,10 +25,10 @@
 
 
                 <sec:ifLoggedIn>
-                    <g:form controller="borrow" method="POST" name="borrowBasketForm">
+                    <g:form controller="borrowApi" action="addToBasket" method="POST" name="borrowBasketForm">
                         <div class="field is-grouped">
                             <p class="control">
-                                <g:actionSubmit action="addToBasket" class="button is-text" value="Add to basket"/>
+                                <g:actionSubmit id="addToBasketBtn" action="addToBasket" class="button is-text" value="Add to basket"/>
                             </p>
                         </div>
                     </g:form>
@@ -50,6 +50,21 @@
                 $('#headerSelected').click(function() {
                     var checked = this.checked;
                     $('.checkbox-select').prop('checked', checked);
+                });
+
+                $('#addToBasketBtn').click(function(e) {
+                    e.preventDefault();
+                    var data = $('#borrowBasketForm').serialize()
+                    $.ajax({
+                        url: $('#borrowBasketForm').attr('action'),
+                        type: "POST",
+                        data: data,
+                        success: function (data) {
+                            console.log('borrow basket size: ' + data.size)
+                            $('#borrowBasketSize').text(data.size);
+                            alert('Books added to basket.');
+                        }
+                    });
                 });
             });
         </script>

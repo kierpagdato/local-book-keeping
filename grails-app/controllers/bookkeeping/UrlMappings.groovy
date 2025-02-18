@@ -3,6 +3,10 @@ package bookkeeping
 class UrlMappings {
 
     static mappings = {
+
+        post "/api/borrow/v1/addToBasket" (controller: 'borrowApi', action: 'addToBasket')
+        post "/api/borrow/v1/checkOut" (controller: 'borrowApi', action: 'checkOut')
+
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
                 // apply constraints here

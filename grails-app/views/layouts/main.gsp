@@ -68,9 +68,7 @@
                                 <span class="icon">
                                     <i class="fa-solid fa-basket-shopping"></i>
                                 </span>
-                                <g:if test="${borrowBasket && borrowBasket?.bookIds?.size() > 0}">
-                                    <code>${borrowBasket.bookIds.size()}</code>
-                                </g:if>
+                                <code id="borrowBasketSize">${borrowBasket.bookIds.size()}</code>
                             </g:link>
                         </div>
                     </div>

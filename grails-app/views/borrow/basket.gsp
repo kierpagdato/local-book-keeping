@@ -22,7 +22,7 @@
 
             <div class="column is-3">
 
-                <g:form controller="borrow" method="POST">
+                <g:form controller="borrow" method="POST" id="checkOutForm">
 
                     <div class="card">
                         <header class="card-header">
@@ -36,7 +36,7 @@
                                     <label class="label">Borrowing user</label>
                                     <div class="control">
                                         <div class="select">
-                                            <g:select name="user" id="user"
+                                            <g:select name="userId" id="userId"
                                                       from="${userList}"
                                                       optionKey="id"
                                                       optionValue="${{it.firstName + ' ' + it.lastName + (secUserId == it.id.toString()? ' (Me)' : '')}}"
@@ -49,8 +49,8 @@
                             </div>
                         </div>
                         <footer class="card-footer">
-                            <g:actionSubmit action="checkOut" name="proceed" class="button is-text card-footer-item" value="Proceed" />
-                            <g:actionSubmit action="clearBasket" name="proceed" class="button is-warning card-footer-item" value="Clear basket" />
+                            <g:actionSubmit action="checkOut" name="proceed" id="checkOutBtn" class="button is-text card-footer-item" value="Proceed" />
+%{--                            <g:actionSubmit action="clearBasket" name="proceed" class="button is-warning card-footer-item" value="Clear basket" />--}%
                         </footer>
                     </div>
 
@@ -72,6 +72,20 @@
                 $('#headerSelected').click(function() {
                     var checked = this.checked;
                     $('.checkbox-select').prop('checked', checked);
+                });
+
+                $('#checkOutBtn').click(function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: '/api/borrow/v1/checkOut',
+                        type: "POST",
+                        data: {user: $('#userId').val()},
+                        success: function (data) {
+                            if(data.transactionId) {
+                                window.location.replace('/borrow/receipt/' + data.transactionId)
+                            }
+                        }
+                    });
                 });
             });
         </script>

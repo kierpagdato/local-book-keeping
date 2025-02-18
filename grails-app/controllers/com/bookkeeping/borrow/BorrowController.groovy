@@ -116,7 +116,8 @@ class BorrowController {
             selectedUser = userDaoService.get(params.user)
         }
 
-        //check available basket
+        //Check user borrow limit
+        //Max value is set in config
         int userBorrowCount = borrowDaoService.countUserBorrow(selectedUser.id)
         if(userBorrowCount + basket.bookIds.size() > userConfigService.userBorrowLimit) {
             badRequestUserLimit()
