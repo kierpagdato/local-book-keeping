@@ -31,6 +31,7 @@ class BorrowController {
 
     def index() {
 
+        println "borrow index start " + System.currentTimeMillis()
         params.max = params?.max?: 5
         params.offset = params?.offset?: 0
 
@@ -45,6 +46,8 @@ class BorrowController {
             borrowList = borrowDaoService.listDistinct(params, myUserDetails.id)
             count = borrowDaoService.countDistinct(myUserDetails.id)
         }
+
+        println "borrow index end " + System.currentTimeMillis()
         [list: borrowList,
         count: count]
     }

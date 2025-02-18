@@ -34,9 +34,9 @@ class Book {
     static transients = ['quantity']
 
     static constraints = {
-        title maxSize: 50, nullable: false, blank: false
-        author maxSize: 50, nullable: false, blank: false
-        isbn maxSize: 50, nullable: false, blank: false
+        title maxSize: 100, nullable: false, blank: false
+        author maxSize: 100, nullable: false, blank: false
+        isbn maxSize: 100, nullable: false, blank: false
         status nullable: false
         description maxSize: 1000, nullable: false, blank: false
         quantity bindable: true, minSize: 1

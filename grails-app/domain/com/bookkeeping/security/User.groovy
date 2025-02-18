@@ -42,7 +42,7 @@ class User implements Serializable {
         password blank: false, password: true
         firstName maxSize: 50, nullable: false, blank: false
         lastName maxSize: 50, nullable: false, blank: false
-        email maxSize: 50, nullable: false, blank: false, email: true
+        email maxSize: 100, nullable: false, blank: false, email: true
     }
 
     Set<Role> getAuthorities() {

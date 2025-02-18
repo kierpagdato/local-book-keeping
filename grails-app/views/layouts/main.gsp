@@ -68,7 +68,7 @@
                                 <span class="icon">
                                     <i class="fa-solid fa-basket-shopping"></i>
                                 </span>
-                                <code id="borrowBasketSize">${borrowBasket.bookIds.size()}</code>
+                                <code id="borrowBasketSize">${borrowBasket.bookIds?.size()}</code>
                             </g:link>
                         </div>
                     </div>
