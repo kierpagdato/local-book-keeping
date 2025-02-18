@@ -25,6 +25,7 @@ class Borrow {
     static mapping = {
         status enumType: 'string'
         type enumType: 'string'
+        transactionId index: 'transaction_Idx'
     }
 
     static constraints = {

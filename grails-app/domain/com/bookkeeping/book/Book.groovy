@@ -29,6 +29,7 @@ class Book {
     static mapping = {
         status enumType: 'string'
         description type: 'text'
+        author index: 'author_Idx'
     }
 
     static transients = ['quantity']
