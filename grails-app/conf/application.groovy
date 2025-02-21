@@ -19,3 +19,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         [pattern: '/**/images/**',   access: ['permitAll']],
         [pattern: '/**/favicon.ico', access: ['permitAll']]
 ]
+
+
+grails.plugin.auditLog.disabled = true
