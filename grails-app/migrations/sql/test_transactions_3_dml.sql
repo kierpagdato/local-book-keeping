@@ -1,4 +1,4 @@
-INSERT INTO `library_db`.`borrow` (`id`, `borrower_id`, `processor_id`, `book_id`, `transaction_id`, `date_borrowed`, `date_returned`, `type`, `status`, `version`, `date_created`, `last_updated`)
+INSERT INTO `borrow` (`id`, `borrower_id`, `processor_id`, `book_id`, `transaction_id`, `date_borrowed`, `date_returned`, `type`, `status`, `version`, `date_created`, `last_updated`)
 VALUES
     (2001, 443, 181, 412, '156164f6-3e7d-407a-a22d-1b3c130e9238', '2025-02-13 07:21:21', '2025-02-15 07:21:21', 'LIBRARY', 'RETURNED', 0, NOW(), NOW()),
     (2002, 151, 438, 169, '02bbe899-30b4-4213-bf03-28e7224cf9e3', '2025-01-29 05:13:38', '2025-01-31 05:13:38', 'LIBRARY', 'RETURNED', 0, NOW(), NOW()),

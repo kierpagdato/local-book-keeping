@@ -136,6 +136,9 @@ environments:
         dataSource:
             dbCreate: none
             dialect: org.hibernate.dialect.MySQL8Dialect
+            url: ${tc_mysql_url}
+            username: root
+            password: test
             logSql: true
     production:
         dataSource:

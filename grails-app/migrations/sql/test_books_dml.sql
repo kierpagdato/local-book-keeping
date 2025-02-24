@@ -1,4 +1,4 @@
-INSERT INTO `library_db`.`book` (`id`, `title`, `author`, `isbn`, `status`, `description`, `version`, `date_created`, `last_updated`)
+INSERT INTO `book` (`id`, `title`, `author`, `isbn`, `status`, `description`, `version`, `date_created`, `last_updated`)
 VALUES
     (23, 'Passengers', 'Sierra False Bindweed', '323150251-9', 'SHELVED', 'tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam', 0, NOW(), NOW()),
     (24, 'Where Angels Go, Trouble Follows', 'Coffea', '227632438-4', 'SHELVED', 'est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu', 0, NOW(), NOW()),

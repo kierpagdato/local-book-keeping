@@ -1,4 +1,4 @@
-INSERT INTO `library_db`.`user` (`id`, `username`, `password`, `enabled`, `email`, `first_name`, `last_name`, `account_expired`, `account_locked`, `password_expired`, `version`, `date_created`, `last_updated`)
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `email`, `first_name`, `last_name`, `account_expired`, `account_locked`, `password_expired`, `version`, `date_created`, `last_updated`)
 VALUES
     (3, 'Yellow Rattle3', '{bcrypt}$2a$10$8igghkx6olevd1DZusAZkuhb9QDMNm3byVwfCKsgrkhz2zYwbIDze', true, 'rberick2@irs.gov', 'Ronalda', 'Berick', FALSE, FALSE, FALSE, 0, NOW(), NOW()),
     (4, 'Gila River Dodder4', '{bcrypt}$2a$10$8igghkx6olevd1DZusAZkuhb9QDMNm3byVwfCKsgrkhz2zYwbIDze', false, 'abugg3@ucoz.com', 'Audy', 'Bugg', FALSE, FALSE, FALSE, 0, NOW(), NOW()),
