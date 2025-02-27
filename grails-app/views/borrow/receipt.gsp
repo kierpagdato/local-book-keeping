@@ -1,3 +1,4 @@
+<%@ page import="com.bookkeeping.borrow.Borrow" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -87,11 +88,13 @@
                             </div>
                         </div>
 
-                        <sec:ifAnyGranted roles="ROLE_LIBRARIAN">
-                            <footer class="card-footer">
-                                <g:submitButton name="return" class="button is-text card-footer-item" value="Process return" />
-                            </footer>
-                        </sec:ifAnyGranted>
+                        <g:if test="${list[0].status != Borrow.Status.RETURNED}">
+                            <sec:ifAnyGranted roles="ROLE_LIBRARIAN">
+                                <footer class="card-footer">
+                                    <g:submitButton name="return" class="button is-text card-footer-item" value="Process return" />
+                                </footer>
+                            </sec:ifAnyGranted>
+                        </g:if>
                     </div>
 
                 </g:form>
