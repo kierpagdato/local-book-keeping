@@ -1,10 +1,10 @@
-package com.bookkeeping
+package com.bookkeeping.user
 
-import com.bookkeeping.borrow.Borrow
+import com.bookkeeping.security.User
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class BorrowSpec extends Specification implements DomainUnitTest<Borrow> {
+class UserSpec extends Specification implements DomainUnitTest<User> {
 
     def setup() {
     }

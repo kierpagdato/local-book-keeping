@@ -44,26 +44,26 @@ class BorrowControllerSpec extends Specification implements ControllerUnitTest<B
     void "Test the get receipts"() {
         given: "Receipt lists"
 
-        List<Borrow> borrowList = [
-                new Borrow(transactionId: '111', dateBorrowed: LocalDateTime.now(),
-                        book: new Book(title: 'Sesame Street', author: 'John Doe', isbn: '111111111',
-                                status: Book.Status.OUT, description: 'Sesame street book'),
-                        borrower: new User(username: 'johndoe', password: '123123',
-                                email: 'johndoe@gmail.com', firstName: 'John', lastName: 'Doe'),
-                        processor: new User(username: 'johndoe', password: '123123',
-                                email: 'johndoe@gmail.com', firstName: 'John', lastName: 'Doe'),
-                        status: Borrow.Status.OUT,
-                        type: Borrow.Type.SELF
-                )
-        ]
+            List<Borrow> borrowList = [
+                    new Borrow(transactionId: '111', dateBorrowed: LocalDateTime.now(),
+                            book: new Book(title: 'Sesame Street', author: 'John Doe', isbn: '111111111',
+                                    status: Book.Status.OUT, description: 'Sesame street book'),
+                            borrower: new User(username: 'johndoe', password: '123123',
+                                    email: 'johndoe@gmail.com', firstName: 'John', lastName: 'Doe'),
+                            processor: new User(username: 'johndoe', password: '123123',
+                                    email: 'johndoe@gmail.com', firstName: 'John', lastName: 'Doe'),
+                            status: Borrow.Status.OUT,
+                            type: Borrow.Type.SELF
+                    )
+            ]
 
         when: "Call the get receipts"
-        request.method = 'GET'
-        controller.receipt('111')
+            request.method = 'GET'
+            controller.receipt('111')
 
         then: "A redirect is issued to the show action"
-        1 * controller.borrowDaoService.listByTransactionId(_) >> borrowList
-        model.list.size() == 1
+            1 * controller.borrowDaoService.listByTransactionId(_) >> borrowList
+            model.list.size() == 1
     }
 
     void "Test the get basket"() {
@@ -86,15 +86,15 @@ class BorrowControllerSpec extends Specification implements ControllerUnitTest<B
 
     void "Test add to basket"() {
         given: "Selected books"
-        params.selected = (String[]) ['1', '2', '3']
+            params.selected = (String[]) ['1', '2', '3']
 
         when: "Add to session basket"
-        request.contentType = FORM_CONTENT_TYPE
-        request.method = 'POST'
-        controller.addToBasket()
+            request.contentType = FORM_CONTENT_TYPE
+            request.method = 'POST'
+            controller.addToBasket()
 
         then: "Redirected back to book list"
-        response.redirectedUrl == '/'
+            response.redirectedUrl == '/'
     }
 
     void "Test clear basket"() {
