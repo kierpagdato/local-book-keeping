@@ -1,8 +1,5 @@
 package com.bookkeeping.account
 
-import com.bookkeeping.book.Book
-import com.bookkeeping.book.BookController
-import com.bookkeeping.book.BookDaoService
 import com.bookkeeping.security.User
 import com.bookkeeping.security.UserDaoService
 import com.bookkeeping.security.UserRoleDaoService
