@@ -28,6 +28,22 @@ Create a DAO/repository service class to manage database transactions with the e
 Create a service class for business logic processing wherein the function does not focus on a single entity and requires data processing for different domains
 
 #### Environment variables
-DB_USERNAME default sa
-DB_PASSWORD default
-DB_NAME 
+| Key          |                                             Sample value                                             |        Description |
+|:-------------|:----------------------------------------------------------------------------------------------------:|-------------------:|
+| DB_DRIVER    |                                       com.mysql.cj.jdbc.Driver                                       |    Database driver |
+| DB_USERNAME  |                                             library_user                                             |      Database user |
+| DB_PASSWORD  |                                                111222                                                |  Database password |
+| DB_URL       | jdbc:mysql://127.0.0.1:3306/library_db?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true  |       Database URL | 
+
+#### Database migration
+
+Using liquibase:
+1. We can generate the tables/columns equivalent of our domain classes
+2. Create our db environment
+3. Set up initial tables/data
+
+Goals to take note:
+
+`dbmGenerateGormChangelog` - to generate the changelog file based on our domain classes
+`dbmGormDiff` - to regenerate the changelog if there are changes in our domain classes
+`dbmClearChecksums` - to fix the checksum validation error(without any changes)
