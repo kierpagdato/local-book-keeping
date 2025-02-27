@@ -34,7 +34,7 @@ class AccountController {
     def save(User user) {
 
         if(!user.validate()) {
-            render(view: 'register', model: [user: user])
+            render view: 'register', model: [user: user]
             return
         }
 

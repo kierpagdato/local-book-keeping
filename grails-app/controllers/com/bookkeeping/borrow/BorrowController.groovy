@@ -27,7 +27,9 @@ class BorrowController {
 
     SpringSecurityService springSecurityService
 
-    static allowedMethods = [selfCheckout: "POST", addToBasket: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [selfCheckout: "POST", addToBasket: "POST",
+                             clearBasket: "POST", returnBorrow: "POST",
+                             update: "PUT", delete: "DELETE"]
 
     def index() {
 
@@ -46,13 +48,12 @@ class BorrowController {
             count = borrowDaoService.countDistinct(myUserDetails.id)
         }
 
-        [list: borrowList,
-        count: count]
+        render view: 'index', model: [list: borrowList, count: count]
     }
 
     def receipt(String id) {
         List<Borrow> borrowList = borrowDaoService.listByTransactionId(id)
-        [list: borrowList]
+        render view: 'receipt', model: [list: borrowList]
     }
 
     def basket() {
@@ -67,8 +68,7 @@ class BorrowController {
 
         BorrowBasket basket = SessionUtils.getBorrowBasket(session);
         List<Book> bookList = bookDaoService.listByIds(basket.bookIds)
-        [list: bookList,
-        userList: userList]
+        render view: 'basket', model: [list: bookList, userList: userList]
     }
 
     def addToBasket() {
@@ -133,16 +133,11 @@ class BorrowController {
             basket.bookIds.clear()
         }
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = 'Check out successful.'
-                if(transactionId) {
-                    redirect controller: 'borrow', action: 'receipt', id: transactionId
-                } else {
-                    redirect controller: 'book', action: 'index'
-                }
-            }
-            '*' { respond user, [status: CREATED] }
+        flash.message = 'Check out successful.'
+        if(transactionId) {
+            redirect controller: 'borrow', action: 'receipt', id: transactionId
+        } else {
+            redirect controller: 'book', action: 'index'
         }
     }
 
@@ -152,13 +147,8 @@ class BorrowController {
 
         basket.bookIds.clear()
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = 'Basket cleared.'
-                redirect controller: 'book', action: 'index'
-            }
-            '*' { respond user, [status: CREATED] }
-        }
+        flash.message = 'Basket cleared.'
+        redirect controller: 'book', action: 'index'
     }
 
     @Secured('ROLE_LIBRARIAN')
@@ -167,13 +157,8 @@ class BorrowController {
         User selectedUser = springSecurityService.currentUser as User
         borrowService.returnBorrow(id, selectedUser)
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = 'Returned.'
-                redirect controller: 'book', action: 'index'
-            }
-            '*' { respond user, [status: OK] }
-        }
+        flash.message = 'Returned.'
+        redirect controller: 'book', action: 'index'
     }
 
     protected void badRequestUserLimit() {

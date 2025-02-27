@@ -14,7 +14,6 @@ interface IBookDaoService {
 
     Book save(Book book)
 
-
     void delete(Serializable id)
 
 }

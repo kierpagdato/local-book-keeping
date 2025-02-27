@@ -38,6 +38,8 @@ class BookController {
             return
         }
 
+        book.quantity = book.quantity?: 1
+
         for(int i = 0; i < book.quantity; i++) {
             book.id = null
             bookDaoService.save(new Book(book.properties))
