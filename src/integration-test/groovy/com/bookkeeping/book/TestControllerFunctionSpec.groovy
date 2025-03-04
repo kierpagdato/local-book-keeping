@@ -44,11 +44,16 @@ class TestControllerFunctionSpec extends Specification implements GroovyObject {
         if (!mysqlContainer.isRunning()) {
             println("*********** Starting MySQL container")
             mysqlContainer
+                    .withInitScript("sql/init_db.sql")
                     .withUsername("root")
                     .withPassword("test")
-                    .withDatabaseName("library_db")
                     .start()
 
+            println("url: " + mysqlContainer.jdbcUrl)
+            println("mysql: " + mysqlContainer.host + " : " + mysqlContainer.firstMappedPort)
+            println("user: " + mysqlContainer.username + " : " + mysqlContainer.password)
+
+            System.setProperty("tc_mysql_base_url", mysqlContainer.host + ":" + mysqlContainer.firstMappedPort)
             System.setProperty("tc_mysql_url", mysqlContainer.jdbcUrl + "?serverTimezone=UTC")
             System.setProperty("tc_mysql_username", mysqlContainer.username)
             System.setProperty("tc_mysql_password", mysqlContainer.password)
