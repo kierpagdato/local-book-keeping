@@ -141,6 +141,8 @@ dependencies {
     testImplementation 'org.testcontainers:mysql:1.17.6'
     testImplementation 'io.ansr.functional.test:odr-functional-test-plugin:1.0.0-SNAPSHOT'
 
+// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-sleuth
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:3.1.11'
 }
 
 bootRun {

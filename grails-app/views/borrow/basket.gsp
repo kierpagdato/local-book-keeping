@@ -92,6 +92,10 @@
                                     window.location.replace('/borrow/receipt/' + data.transactionId)
                                 }
                             }
+                        },
+                        error: function (xhr) {
+                            var response = JSON.parse(xhr.responseText)
+                            alert(response.error)
                         }
                     });
                 });

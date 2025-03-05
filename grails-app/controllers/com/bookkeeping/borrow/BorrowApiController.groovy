@@ -106,17 +106,19 @@ class BorrowApiController {
 
     protected void badRequestUserLimit() {
         request.withFormat {
-            form multipartForm {
-                flash.message = 'Borrow limit exceeded. '
-                redirect controller: 'borrow', action: "index", method: "GET"
+            '*'{
+                response.status = BAD_REQUEST.value()
+                render ([error: "Borrow limit exceeded."] as JSON)
             }
-            '*'{ render status: BAD_REQUEST }
         }
     }
 
     protected void badRequest() {
         request.withFormat {
-            '*'{ render status: BAD_REQUEST }
+            '*'{
+                response.status = BAD_REQUEST.value()
+                render ([error: "Invalid request."] as JSON)
+            }
         }
     }
 
