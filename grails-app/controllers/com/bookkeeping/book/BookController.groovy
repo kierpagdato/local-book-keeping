@@ -34,11 +34,14 @@ class BookController {
     def save(Book book) {
 
         if(!book.validate()) {
+            log.debug("Saving book payload is invalid ${book.id}.")
             render(view: 'create', model: [book: book])
             return
         }
 
         book.quantity = book.quantity?: 1
+
+        log.info("Saving book entity with copies: ${book.quantity}.")
 
         for(int i = 0; i < book.quantity; i++) {
             book.id = null
@@ -57,6 +60,7 @@ class BookController {
     def update(Book book) {
 
         if(!book.validate()) {
+            log.debug("Updating book payload is invalid ${book.id}.")
             render view: 'edit', model: [book: book]
             return
         }
@@ -68,6 +72,7 @@ class BookController {
 
     @Secured('ROLE_LIBRARIAN')
     def delete(Long id) {
+        log.debug("Deleting book ${id}.")
         bookDaoService.delete(id)
         redirect action:"index"
     }

@@ -40,6 +40,7 @@ class BorrowController {
 
         List<Borrow> borrowList = []
         Long count = 0
+
         if(myUserDetails.hasAuthority("ROLE_LIBRARIAN")) {
             borrowList = borrowDaoService.listDistinct(params, null)
             count = borrowDaoService.countDistinct(null)
@@ -63,6 +64,7 @@ class BorrowController {
         List<User> userList = [springSecurityService.currentUser]
 
         if(myUserDetails.hasAuthority("ROLE_LIBRARIAN")) {
+            log.debug("Returning all users for ROLE_LIBRARIAN.")
             userList = User.list()
         }
 
@@ -76,6 +78,7 @@ class BorrowController {
         boolean isAdded = false
 
         if(params?.selected) {
+            log.info("Adding selected books(${params.selected}) to basket.")
             SessionUtils.getBorrowBasket(session)?.addToBasket(params.selected)
             isAdded = true
         }
@@ -95,7 +98,10 @@ class BorrowController {
 
         //Return to book list if basket is empty
         if(CollectionUtils.isEmpty(basket.bookIds)) {
-            redirect controller: 'book', action: 'index'
+            log.debug("Checking out empty basket.")
+
+            flash.message = "Cannot checkout empty basket."
+            redirect controller: 'borrow', action: 'basket'
             return
         }
 
@@ -109,6 +115,7 @@ class BorrowController {
         //It's safer to check the user doesn't have ROLE_LIBRARIAN
         //ROLE_USER cannot checkOut for other user
         if(!myUserDetails.hasAuthority("ROLE_LIBRARIAN") && !isCurrentId) {
+            log.debug("Cannot check out other user with no ROLE_LIBRARIAN. selected secUser: ${selectedUser.id} - user: ${params.user}")
             badRequest()
             return
         }
@@ -121,6 +128,7 @@ class BorrowController {
         //Max value is set in config
         int userBorrowCount = borrowDaoService.countUserBorrow(selectedUser.id)
         if(userBorrowCount + basket.bookIds.size() > userConfigService.userBorrowLimit) {
+            log.debug("Cannot check out. Exceeded the allowable borrow limit. Current out: ${userBorrowCount} - basket size: ${basket.bookIds.size()}")
             badRequestUserLimit()
             return
         }
@@ -129,6 +137,7 @@ class BorrowController {
 
         String transactionId
         if(CollectionUtils.isNotEmpty(bookList)) {
+            log.debug("Process borrowing books.")
             transactionId = borrowService.selfService(bookList, selectedUser, isCurrentId)
             basket.bookIds.clear()
         }
@@ -154,6 +163,7 @@ class BorrowController {
     @Secured('ROLE_LIBRARIAN')
     def returnBorrow(String id) {
 
+        log.debug("Returning books for transaction ${id}.")
         User selectedUser = springSecurityService.currentUser as User
         borrowService.returnBorrow(id, selectedUser)
 

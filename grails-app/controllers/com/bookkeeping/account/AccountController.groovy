@@ -1,6 +1,5 @@
 package com.bookkeeping.account
 
-import com.bookkeeping.borrow.BorrowBasket
 import com.bookkeeping.security.UserDaoService
 import com.bookkeeping.security.UserRoleDaoService
 import com.bookkeeping.security.User
@@ -34,6 +33,7 @@ class AccountController {
     def save(User user) {
 
         if(!user.validate()) {
+            log.debug("Saving user payload is invalid ${user.id}.")
             render view: 'register', model: [user: user]
             return
         }
@@ -41,6 +41,7 @@ class AccountController {
         try {
             userDaoService.saveUser(user)
         } catch (ValidationException e) {
+            log.error("Validation exception saving user ${user.id}.", e)
             respond user.errors, view:'register'
             return
         }
@@ -74,16 +75,19 @@ class AccountController {
         User secUser = springSecurityService.currentUser as User
 
         if (user == null) {
+            log.debug("Updating user payload empty.")
             notFound()
             return
         }
 
         if(secUser.id != user.id) {
+            log.debug("Request invalid. Cannot update other user entity sessionuser.id = ${secUser.id} - user.id = ${user.id}.")
             badRequest()
             return
         }
 
         if(!user.validate()) {
+            log.debug("Updating user payload is invalid ${user.id}.")
             render view: 'edit', model: [user: user]
             return
         }
@@ -92,6 +96,7 @@ class AccountController {
             userDaoService.save(user)
             springSecurityService.reauthenticate(user.username)
         } catch (ValidationException e) {
+            log.error("Validation exception updating user ${user.id}.", e)
             respond user.errors, view:'edit'
             return
         }
@@ -112,11 +117,13 @@ class AccountController {
         User secUser = springSecurityService.currentUser as User
 
         if (id == null) {
+            log.debug("Cannot delete empty id.")
             notFound()
             return
         }
 
         if (id != secUser.id) {
+            log.debug("Request invalid. Cannot delete other user entity sessionuser.id = ${secUser.id} - user.id = ${id}.")
             badRequest()
             return
         }

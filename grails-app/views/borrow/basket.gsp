@@ -1,8 +1,9 @@
-<%@ page import="com.bookkeeping.security.User" %>
+<%@ page import="com.bookkeeping.security.User;com.bookkeeping.borrow.BorrowBasket" %>
 <!DOCTYPE html>
 <html>
     <head>
         <g:set var="page" value="borrowBasket" scope="request"/>
+        <g:set var="borrowBasket" value="${session.getAttribute(BorrowBasket.SESSION_KEY)}"/>
         <g:set var="secUserId" value="${sec.loggedInUserInfo(field: 'id')}"/>
         <meta name="layout" content="main" />
         <title>Basket</title>
@@ -48,10 +49,13 @@
                                 </div>
                             </div>
                         </div>
-                        <footer class="card-footer">
-                            <g:actionSubmit action="checkOut" name="proceed" id="checkOutBtn" class="button is-text card-footer-item" value="Proceed" />
-%{--                            <g:actionSubmit action="clearBasket" name="proceed" class="button is-warning card-footer-item" value="Clear basket" />--}%
-                        </footer>
+
+                        <g:if test="${borrowBasket?.bookIds?.size() > 0}">
+                            <footer class="card-footer">
+                                <g:actionSubmit action="checkOut" name="proceed" id="checkOutBtn" class="button is-text card-footer-item" value="Proceed" />
+    %{--                            <g:actionSubmit action="clearBasket" name="proceed" class="button is-warning card-footer-item" value="Clear basket" />--}%
+                            </footer>
+                        </g:if>
                     </div>
 
                 </g:form>
@@ -80,9 +84,13 @@
                         url: '/api/borrow/v1/checkOut',
                         type: "POST",
                         data: {user: $('#userId').val()},
-                        success: function (data) {
-                            if(data.transactionId) {
-                                window.location.replace('/borrow/receipt/' + data.transactionId)
+                        success: function (data, status, xhr) {
+                            if(xhr.status == 204) {
+                                alert('Basket is empty.');
+                            } else {
+                                if(data.transactionId) {
+                                    window.location.replace('/borrow/receipt/' + data.transactionId)
+                                }
                             }
                         }
                     });

@@ -38,11 +38,13 @@ class UserController {
     def save(User user) {
 
         if (user == null) {
+            log.debug("Saving user payload empty.")
             notFound()
             return
         }
 
         if(!user.validate()) {
+            log.debug("Saving user payload is invalid ${user.id}.")
             render view: 'create', model: [user: user]
             return
         }
@@ -51,6 +53,7 @@ class UserController {
             userDaoService.save(user)
             userRoleDaoService.setRoles(user, params.getList('roles'))
         } catch (ValidationException e) {
+            log.error("Validation exception saving user ${user.id}.", e)
             respond user.errors, view:'create'
             return
         }
@@ -65,11 +68,13 @@ class UserController {
     def update(User user) {
 
         if (user == null) {
+            log.debug("Updating user payload empty.")
             notFound()
             return
         }
 
         if(!user.validate()) {
+            log.debug("Updating user payload is invalid ${user.id}.")
             render view: 'edit', model: [user: user]
             return
         }
@@ -78,6 +83,7 @@ class UserController {
             userDaoService.save(user)
             userRoleDaoService.setRoles(user, params.getList('roles'))
         } catch (ValidationException e) {
+            log.error("Validation exception updating user ${user.id}.", e)
             respond user.errors, view:'edit'
             return
         }
@@ -91,11 +97,13 @@ class UserController {
         User secUser = springSecurityService.currentUser as User
 
         if (id == null) {
+            log.debug("Cannot delete empty id.")
             notFound()
             return
         }
 
         if (id == secUser.id) {
+            log.debug("Cannot delete own account in User feature. Please proceed to delete under my account.")
             badRequest()
             return
         }

@@ -44,7 +44,6 @@ environments:
             endpoints:
                 enabled-by-default: false
 
-
 bookkeeping:
     user:
         borrow-limit: 5
@@ -102,10 +101,6 @@ grails:
                 taglib: none
                 staticparts: none
 
----
-bookkeeping:
-    user:
-        borrowLimit: 5
 ---
 hibernate:
     cache:
